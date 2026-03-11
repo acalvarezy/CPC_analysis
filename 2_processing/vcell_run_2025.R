@@ -6,7 +6,7 @@ tic("total")
 
 
 # CHANGE: Folder paths
-funcPath<-"/Users/catalinaalvarez/Documents/GitHub/VCell_Analysis/functions"
+funcPath<-"/Users/catalinaalvarez/Documents/GitHub/CPC_Analysis/functions"
 importPath<-"/Users/catalinaalvarez/Documents/CPC_data_2026"
 exportPath<-"/Users/catalinaalvarez/Documents/CPC_plots_2026"
 desktop<-"/Users/catalinaalvarez/Desktop"
@@ -128,7 +128,7 @@ sims <- c(
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
- "test"
+  "test"
 )
 #########################################################
 
