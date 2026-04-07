@@ -109,9 +109,9 @@ species_info_list[[10]] <- c("pH3S10rep", "Inactive Species", "Active Species", 
 # Model type, goes on the left of the heatmap
 # Change
 kt_width = c(
+  #"Metacentric_Relaxed"
   "Metacentric_Relaxed"
   #"Metacentric_Tensed"
-  # "Metacentric_Tensed"
   # "Telocentric_Relaxed"
   # "Telocentric_Tensed"
   # "Acrocentric_Relaxed"
@@ -122,13 +122,14 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  "SimID_305251587_0__exported"
+  "SimID_309083866_0__exported"
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  "test"
+  "03_31_26_metacentric_relaxed_MCF10A_chr19_PMP1_kppsAll=0.01s"
+  
 )
 #########################################################
 

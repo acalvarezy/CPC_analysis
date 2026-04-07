@@ -5,11 +5,11 @@ lapply(packages, require, character.only = TRUE)
 importPath<-"/Users/catalinaalvarez/Documents/CPC_plots_2026"
 
 var <- c(
-  "02_23_26_metacentric_relaxed_MCF10A_chr19_PMP1",
-  "02_23_26_metacentric_tensed_MCF10A_chr19_PMP1"
+  "03_31_26_metacentric_relaxed_MCF10A_chr19_PMP1_kpps=0.1s",
+  "03_31_26_metacentric_tensed_MCF10A_chr19_PMP1_kpps=0.1s"
 )
 
-timepoint = 50
+timepoint = 40
 timepoint = timepoint+1
 
 df <- data.frame(
@@ -93,13 +93,13 @@ p3 <- ggplot(df, aes(x=state, y=activeboundCPC_ic, fill=state))+ geom_bar(stat="
   theme(panel.background = element_blank(),panel.border = element_rect(fill = NA)) +
   ylab('Active CPC IC (uM)') + xlab('') + geom_col(width = 0.5, position = position_dodge(0.9)) +
   scale_fill_brewer(palette = "Set1", direction = -1) + theme(legend.position = "none") +
-  geom_hline(yintercept = 3.066, linetype = "dashed", color = "black", size = 1)
+  geom_hline(yintercept = 3.679, linetype = "dashed", color = "black", size = 1)
 
 p4 <- ggplot(df, aes(x=state, y=activeboundCPC_kt, fill=state))+ geom_bar(stat="identity", width=0.5) +
   theme(panel.background = element_blank(),panel.border = element_rect(fill = NA)) +
   ylab('Active CPC KT (uM)') + xlab('') + geom_col(width = 0.5, position = position_dodge(0.9)) +
   scale_fill_brewer(palette = "Set1", direction = -1) + theme(legend.position = "none") +
-  geom_hline(yintercept = 3.066, linetype = "dashed", color = "black", size = 1)
+  geom_hline(yintercept = 3.679, linetype = "dashed", color = "black", size = 1)
 
 p5 <- ggplot(df, aes(x=state, y=pNDC80rep, fill=state))+ geom_bar(stat="identity", width=0.5) +
   theme(panel.background = element_blank(),panel.border = element_rect(fill = NA)) +
