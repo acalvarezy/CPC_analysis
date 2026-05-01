@@ -55,7 +55,6 @@ def convert_hdf5_to_csv(
     if len(species_list) == 0:
         default_species = [
             "BUB1a",
-            "BUB1a_his",
             "CPCa",
             "CPCi",
             "H2A",
@@ -80,7 +79,8 @@ def convert_hdf5_to_csv(
             "pH3_CPCa",
             "pH3_CPCi",
             "pKNL1",
-            "BUB1a_pKNL1",
+            "BUB1a_pknl1",
+            "pKNL1_bub1a",
             "PLK1a",
             "PLK1i",
             "pTTKa",
@@ -91,19 +91,19 @@ def convert_hdf5_to_csv(
             "pNDC80_pTTKa",
             "pNDC80_pTTKi",
             "SGO1",
-	    "SGO1_CPCi",
+	        "SGO1_CPCi",
             "SGO1_CPCa",
-	    "SGO1_CPCi_pH3",
-	    "SGO1_CPCa_pH3",
+	        "SGO1_CPCi_pH3",
+	        "SGO1_CPCa_pH3",
             "H3_CPCa",
             "H3_CPCi", 
             "CPC_all",
-	    "CPCi_total",
-	    "CPCa_total",
+	        "CPCi_total",
+	        "CPCa_total",
             "bound_CPC",
             "bound_active_CPC",
-	    "pNDC80rep",
-	    "pH3S10rep"
+	        "pNDC80rep",
+	        "pH3S10rep"
         ]
         print(f"Using default species list of length {len(default_species)}")
     else:

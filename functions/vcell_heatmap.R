@@ -36,7 +36,9 @@ vcell_heatmap <- function(
   # initialize variables
   n_SimID<-length(SimID)
   n_t<-(tSpan-tInit)/desiredInterval+1
-  trange<-seq(from=tInit/tInterval,to=tSpan/tInterval,length.out=n_t)
+  #trange<-seq(from=tInit/tInterval,to=tSpan/tInterval,length.out=n_t)
+  trange<-c(0, 1, 3, 5, 10, 30)
+  
   
   plist<-list()
   L <- list()
@@ -147,7 +149,8 @@ vcell_heatmap <- function(
   }
   
   
-  t_short<-seq(from=tInit,to=tSpan,length.out=n_t)
+  #t_short<-seq(from=tInit,to=tSpan,length.out=n_t)
+  t_short<-c(0, 10, 30, 50, 100, 300)
   t_equal_str<-"t (s) ="
   
   t_labs[1] <- paste(t_equal_str,t_short[1])

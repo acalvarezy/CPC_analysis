@@ -10,16 +10,19 @@ os.chdir(new_directory_path)
 
 #Update the simulation data
 models = np.array([
-    "03_31_26_metacentric_realaxed_MCF10A_chr19_PMP1"
+    "04_06_26_metacentric_relaxed_MCF10A_chr19_PMP1_nointermediates",
+	"04_06_26_metacentric_relaxed_MCF10A_chr19_PMP1_nointermediates"
 	])
 
 
 simulations = np.array([
-	"03_31_26_metacentric_relaxed_MCF10A_chr19_PMP1_kppsall=0.01s"
+	"04_06_26_metacentric_relaxed_MCF10A_chr19_PMP1_alphakt_scan_0.4",
+	"04_06_26_metacentric_relaxed_MCF10A_chr19_PMP1_alphakt_scan_0.7"
         ])
  
 simID = np.array([ 
-	"SimID_309083866_0__exported"
+	"SimID_309471052_1__exported",
+	"SimID_309471052_2__exported"
         ])
 
 for i in range(len(models)):
