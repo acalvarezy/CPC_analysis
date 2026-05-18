@@ -13,7 +13,7 @@ line_plot <- function(
     importPath="/Users/sam/Research/JanesLab/vcell_data",
     exportPath="/Users/sam/Research/JanesLab/vcell_plots",
     linewidth=0.7,
-    kt_width = 'Metacentric_relaxed', #can be 'Metacentric_Relaxed' or 'Telomeric_Relaxed',etc "relaxed_metacentric"
+    kt_width = 'Metacentric_relaxed', #can be 'Metacentric_Relaxed' or 'Telomeric_Relaxed',etc
     KK_dist_relaxed = 0.575,
     KK_dist_tensed = 1.15,
     KT_width= 0.075,
@@ -24,7 +24,6 @@ line_plot <- function(
   
   ## DEFINE REGIONS
   # pixels per µm in x and center column (pixel coordinates)
-  # dataDim = 180, 52; 4.5 x 1.3
   pixels_per_um_x <- dataDim[2] / chromWidth # 40
   center_x <- dataDim[2] / 2 # 26
   
@@ -48,10 +47,12 @@ line_plot <- function(
   # compute pixel indices (use ceiling/floor to get integer pixel indices)
   x1_calc <- floor(center_x - left_far_um   * pixels_per_um_x) #0 - 13
   x2_calc <- ceiling(center_x - left_near_um  * pixels_per_um_x) #3 - 15
-  x3_calc <- ceiling(center_x - center_half_um * pixels_per_um_x) + 1 #25
+  x3_calc <- ceiling(center_x - center_half_um * pixels_per_um_x) + 1 #25 
   x4_calc <- ceiling  (center_x + center_half_um * pixels_per_um_x) #28
   x5_calc <- ceiling(center_x + right_near_um * pixels_per_um_x) #50 - 38 
   x6_calc <- floor(center_x + right_far_um  * pixels_per_um_x)  #52 - 40 
+  x7_calc <- ceiling((center_x/2) - (cohesin_width* pixels_per_um_x/2)) #11
+  x8_calc <- ceiling((center_x/2) + (cohesin_width* pixels_per_um_x/2)) -1 #14
   
   # clamp to valid pixel indices
   x1 <- max(1, min(dataDim[2], x1_calc))
@@ -60,6 +61,8 @@ line_plot <- function(
   x4 <- max(1, min(dataDim[2], x4_calc))
   x5 <- max(1, min(dataDim[2], x5_calc))
   x6 <- max(1, min(dataDim[2], x6_calc))
+  x7 <- max(1, min(dataDim[2], x7_calc))
+  x8 <- max(1, min(dataDim[2], x8_calc))
   
   # ensure ordering (if clamping collapsed ranges, force minimal sensible ranges)
   if (x1 >= x2) x2 <- min(dataDim[2], x1 + kt_width*pixels_per_um_x)
@@ -68,6 +71,10 @@ line_plot <- function(
     x4 <- min(dataDim[2], x3 + 1)
   }
   if (x5 >= x6) x5 <- min(dataDim[2], x6 - kt_width*pixels_per_um_x)
+  if (x7 > x8)  { # ensure at least one column in center
+    x7 <- max(1, x8 - 1)
+    x8 <- min(dataDim[2], x7 + 1)
+  }
   
   pixels_per_um <- dataDim[1] / chromHeight
   
@@ -77,24 +84,30 @@ line_plot <- function(
     center_px <- dataDim[1] / 2 #72
     y1_new <- ceiling(center_px - half_px) + 1 #66 --> 67
     y2_new <- floor(center_px + half_px) #78
+    y1_bg_new <- ceiling((y1_new/2) - half_px) #28
+    y2_bg_new <- floor((y1_new/2) + half_px) #39
     
     # clamp to valid indices
-    y1 <- max(1, y1_new) # 85
-    y2 <- min(dataDim[1], y2_new) # 96
+    y1 <- max(1, y1_new) # 67
+    y2 <- min(dataDim[1], y2_new) #78
+    y1_bg <- max(1, y1_bg_new) # 28
+    y2_bg <- min(dataDim[1], y2_bg_new) #39
     
   } else if (grepl("telocentric", kt_width, ignore.case = TRUE)) {
     # from 0 um (top) to 0.3 um
     y1_new <- 1  # top pixel (0 um)
-    y2_new <- ceiling(KT_height * pixels_per_um) 
+    y2_new <- ceiling(KT_height * pixels_per_um) #12
+    y1_bg_new <- ceiling((y1_new/2) - half_px) #28
+    y2_bg_new <- floor((y1_new/2) + half_px) -1 #39
     
     # clamp
-    y1 <- max(1, y1_new) 
-    y2 <- min(dataDim[1], max(1, y2_new)) 
+    y1 <- max(1, y1_new) #1
+    y2 <- min(dataDim[1], max(1, y2_new)) #12
+    y1_bg <- max(1, y1_bg_new) # 28
+    y2_bg <- min(dataDim[1], y2_bg_new) #39
     
   }
 
-
-  
   # misc
   folderVar <- 0
   leader <- 10
@@ -115,15 +128,17 @@ line_plot <- function(
   
   kt_species <- vector("list", length(all_species))
   ic_species <- vector("list", length(all_species))
+  bg_species <- vector("list", length(all_species))
   L <- list()
   
   # Initialize empty vectors for each species
   for (i in 1:length(all_species)) {
     kt_species[[i]] <- vector("numeric", ((tSpan/10) + 1))
     ic_species[[i]] <- vector("numeric", ((tSpan/10) + 1))
+    bg_species[[i]] <- vector("numeric", ((tSpan/10) + 1))
   }
   
-  
+   
   # change working directory
   setwd(importPath)
   
@@ -135,11 +150,7 @@ line_plot <- function(
                      "#e6ab02", 
                      "#ff7f00")
   
-  # linewidth <- linewidth
-  # 
-  # all_data <- all_data
-  # all_species <- all_species
-  
+
   
   # data processing
   for(z in 0:(tSpan/10)){
@@ -195,32 +206,36 @@ line_plot <- function(
       left_kinetochore <-matrix[y1:y2, x1:x2]
       right_kinetochore <-matrix[y1:y2, x5:x6]
       inner_centromere <-matrix[y1:y2, x3:x4]
+      background <- matrix[y1_bg:y2_bg, x7:x8]
       
       
       lk <- mean(left_kinetochore)
       rk <- mean(right_kinetochore)
       ic <- mean(inner_centromere)
       kt <- mean(lk, rk)
+      bg <- mean(background)
       
       
       kt_species[[q]][z+1] <- kt
       ic_species[[q]][z+1] <- ic
-      
+      bg_species[[q]][z+1] <- bg
     }
     
   }
   
   for (sp in 1:length(all_data)){
+    #Example: species_info_list[[1]] <- c("CPC", "Inactive CPC", "Active CPC", "CPC Activation", TRUE, FALSE, FALSE, TRUE)
     
-    identity = species_info_list[[sp]][1]
-    speciesInactive = species_info_list[[sp]][2]
-    speciesActive = species_info_list[[sp]][3]
-    speciesFull = species_info_list[[sp]][4]
-    sums = species_info_list[[sp]][5]
-    total = species_info_list[[sp]][6]
-    full = species_info_list[[sp]][7]
-    collapsible = species_info_list[[sp]][8]
-  
+    identity = species_info_list[[sp]][1] #Specifies the File name for saving plot, ex. CPC_plot
+    speciesInactive = species_info_list[[sp]][2] #Specifies the Title on plots with only inactive species
+    speciesActive = species_info_list[[sp]][3] #Specifies the Title on plots with only active species
+    speciesFull = species_info_list[[sp]][4] #Specifies the Title on plots with both active and inactive species
+    sums = species_info_list[[sp]][5] #Specifies whether sums of inactive and active species should be added: Active: Black, Solid & Inactive: Black, Dashed
+    total = species_info_list[[sp]][6] #Specifies whether the sum of all species should be added
+    full = species_info_list[[sp]][7] #Specifies whether all species should be added to line plots
+    collapsible = species_info_list[[sp]][8] #Specifies whether only the top 4 species and their sums/total should be specified
+    
+    
   species <- all_data[[sp]]
   
   if(sp == 1){
@@ -241,20 +256,29 @@ line_plot <- function(
     KT = unlist(kt_species[(pointer + 1):(pointer + length(species))])
   )
   
+  data_bg <- data.frame(
+    Time = 0:(tSpan/10),
+    Species = rep(species, each = ((tSpan/10) + 1)),
+    BG = unlist(bg_species[(pointer + 1):(pointer + length(species))])
+  )
   
   # Reshape to wide
   data_ic <- reshape(data_ic, idvar = "Time", timevar = "Species", direction = "wide")
   data_kt <- reshape(data_kt, idvar = "Time", timevar = "Species", direction = "wide")
+  data_bg <- reshape(data_bg, idvar = "Time", timevar = "Species", direction = "wide")
   
   # Rename columns
   colnames(data_ic)[2:ncol(data_ic)] <- gsub("IC.", "", colnames(data_ic)[2:ncol(data_ic)])
   colnames(data_kt)[2:ncol(data_kt)] <- gsub("KT.", "", colnames(data_kt)[2:ncol(data_kt)])
+  colnames(data_bg)[2:ncol(data_bg)] <- gsub("BG.", "", colnames(data_bg)[2:ncol(data_bg)])
   
-  # Get active and inactive df for IC and KT
+  # Get active and inactive df for IC, KT, and BG
   data_inactive_ic <- data_ic %>% select("Time", ends_with('i'))
   data_active_ic <- data_ic %>% select(-c(colnames(data_inactive_ic %>% select(-c('Time')))))
   data_inactive_kt <- data_kt %>% select("Time", ends_with('i'))
   data_active_kt <- data_kt %>% select(-c(colnames(data_inactive_kt %>% select(-c('Time')))))
+  data_inactive_bg <- data_bg %>% select("Time", ends_with('i'))
+  data_active_bg <- data_bg %>% select(-c(colnames(data_inactive_bg %>% select(-c('Time')))))
   
   # Get all active and inactive species
   active_species <- colnames(data_active_ic %>% select(-c('Time')))
@@ -266,36 +290,43 @@ line_plot <- function(
     if (ncol(data_inactive_kt) > 2){
       data_inactive_ic$Sum_Inactive <- rowSums(data_inactive_ic[, 2:(length(inactive_species)+1)], na.rm = TRUE)
       data_inactive_kt$Sum_Inactive <- rowSums(data_inactive_kt[, 2:(length(inactive_species)+1)], na.rm = TRUE)
+      data_inactive_bg$Sum_Inactive <- rowSums(data_inactive_bg[, 2:(length(inactive_species)+1)], na.rm = TRUE)
     }
     
     if (ncol(data_inactive_kt) == 2){
       data_inactive_ic$Sum_Inactive <- data_inactive_ic[, 2:(length(inactive_species)+1)]
       data_inactive_kt$Sum_Inactive <- data_inactive_kt[, 2:(length(inactive_species)+1)]
+      data_inactive_bg$Sum_Inactive <- data_inactive_bg[, 2:(length(inactive_species)+1)]
     }
     
     if (ncol(data_inactive_kt) < 2){
       data_inactive_ic$Sum_Inactive <- 0
       data_inactive_kt$Sum_Inactive <- 0
+      data_inactive_bg$Sum_Inactive <- 0
     }
     
     if (ncol(data_active_kt) > 2){
       data_active_ic$Sum_Active <- rowSums(data_active_ic[, 2:(length(active_species)+1)], na.rm = TRUE)
       data_active_kt$Sum_Active <- rowSums(data_active_kt[, 2:(length(active_species)+1)], na.rm = TRUE)
+      data_active_bg$Sum_Active <- rowSums(data_active_bg[, 2:(length(active_species)+1)], na.rm = TRUE)
     }
     
     if (ncol(data_active_kt) == 2){
       data_active_ic$Sum_Active <- data_active_ic[, 2:(length(active_species)+1)]
       data_active_kt$Sum_Active <- data_active_kt[, 2:(length(active_species)+1)]
+      data_active_bg$Sum_Active <- data_active_bg[, 2:(length(active_species)+1)]
     }
     
     if (ncol(data_active_kt) < 2){
       data_active_ic$Sum_Active <- 0
       data_active_kt$Sum_Active <- 0
+      data_active_gb$Sum_Active <- 0
     }
     
   }else if(total==TRUE){
     data_ic$Total <- rowSums(data_ic[, 2:(length(species) + 1)], na.rm = TRUE)
     data_kt$Total <- rowSums(data_kt[, 2:(length(species) + 1)], na.rm = TRUE)
+    data_bg$Total <- rowSums(data_bg[, 2:(length(species) + 1)], na.rm = TRUE)
   } 
   
   
@@ -936,8 +967,11 @@ line_plot <- function(
     write.csv(data_inactive_ic, paste(exportPath,paste0("data/data_inactive_ic_",identity,".csv"),sep="/"), row.names = FALSE)
     write.csv(data_active_kt, paste(exportPath,paste0("data/data_active_kt_",identity,".csv"),sep="/"), row.names = FALSE)
     write.csv(data_inactive_kt, paste(exportPath,paste0("data/data_inactive_kt_",identity,".csv"),sep="/"), row.names = FALSE)
+    write.csv(data_active_bg, paste(exportPath,paste0("data/data_active_bg_",identity,".csv"),sep="/"), row.names = FALSE)
+    write.csv(data_inactive_bg, paste(exportPath,paste0("data/data_inactive_bg_",identity,".csv"),sep="/"), row.names = FALSE)
     write.csv(data_ic, paste(exportPath,paste0("data/data_ic_",identity,".csv"),sep="/"), row.names = FALSE)
     write.csv(data_kt, paste(exportPath,paste0("data/data_kt_",identity,".csv"),sep="/"), row.names = FALSE)
+    write.csv(data_bg, paste(exportPath,paste0("data/data_bg_",identity,".csv"),sep="/"), row.names = FALSE)
     
     
     setwd(importPath)

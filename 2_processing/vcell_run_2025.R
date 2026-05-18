@@ -34,18 +34,19 @@ CPC_species <-c("CPCa", "pH2A_SGO1_CPCa", "H3_CPCa", "pH3_CPCa", "SGO1_CPCa", "C
 pH3_species <- c("pH3", "pH3_CPCa", "pH3_CPCi")
 pH2A_species <- c("pH2A", "pH2A_SGO1", "pH2A_SGO1_CPCa", "pH2A_SGO1_CPCi")
 HASPIN_PLK1_species <- c("HASPINa", "HASPINi", "PLK1a", "PLK1i")
-#BUB1a_pKNL1_species <- c("BUB1a", "pKNL1", "BUB1a_pKNL1", "BUB1a_his")
+BUB1a_pKNL1_species <- c("BUB1a",  "pKNL1", "pKNL1_bub1a", "BUB1a_pknl1")
 SGO1_species <- c("SGO1", "pH2A_SGO1", "pH2A_SGO1_CPCi", "pH2A_SGO1_CPCa", "SGO1_CPCi", "SGO1_CPCa")
 bound_CPC <- c("bound_CPC")
 bound_active_CPC <- c("bound_active_CPC")
-pNDC80rep <- c("pNDC80rep")
+pNDC80_species <- c("pNDC80", "pNDC80_TTKi", "pNDC80_pTTKi", "pNDC80_TTKa", "pNDC80_pTTKa")
+pNDC80_total <- c("pNDC80_total")
 pH3S10rep <- c("pH3S10rep")
 
 # ---------------- HEAT MAPS ---------------
 
 # How many heat maps to return
 # Change
-H <- 8
+H <- 7
 
 heatmap_species <- vector("list", H)
 heatmap_info_list <- vector("list", H)
@@ -57,8 +58,7 @@ heatmap_species[[3]] <- pH2A_species
 heatmap_species[[4]] <- SGO1_species
 heatmap_species[[5]] <- bound_CPC
 heatmap_species[[6]] <- bound_active_CPC
-heatmap_species[[7]] <- pNDC80rep
-heatmap_species[[8]] <- pH3S10rep
+heatmap_species[[7]] <- pH3S10rep
 
 # Change, name of plot in plot directory, also name in heatmap, IN ORDER
 heatmap_info_list[[1]] <- c("all CPC")
@@ -67,16 +67,15 @@ heatmap_info_list[[3]] <- c("all pH2A")
 heatmap_info_list[[4]] <- c("all SGO1")
 heatmap_info_list[[5]] <- c("all bound CPC")
 heatmap_info_list[[6]] <- c("all bound active CPC")
-heatmap_info_list[[7]] <- c("all pNDC80rep")
-heatmap_info_list[[8]] <- c("all pH3S10rep")
+heatmap_info_list[[7]] <- c("all pH3S10rep")
 
 
 # ---------------- LINE PLOTS ---------------
-L <- 10
+L <- 11
  
 all_data <- vector("list", L)
 species_info_list <- vector("list", L)
-all_species <- c(CPC_species, pH3_species, pH2A_species, HASPIN_PLK1_species, SGO1_species, bound_CPC, bound_active_CPC, pNDC80rep, pH3S10rep)
+all_species <- c(CPC_species, pH3_species, pH2A_species, HASPIN_PLK1_species, BUB1a_pKNL1_species, SGO1_species, bound_CPC, bound_active_CPC, pNDC80_species, pNDC80_total, pH3S10rep)
 
 
 # Change, IN ORDER
@@ -84,34 +83,60 @@ all_data[[1]] <- CPC_species
 all_data[[2]] <- pH3_species
 all_data[[3]] <- pH2A_species
 all_data[[4]] <- HASPIN_PLK1_species
-#all_data[[5]] <- BUB1a_pKNL1_species
+all_data[[5]] <- BUB1a_pKNL1_species
 all_data[[6]] <- SGO1_species
 all_data[[7]] <- bound_CPC
 all_data[[8]] <- bound_active_CPC
-all_data[[9]] <- pNDC80rep
-all_data[[10]] <- pH3S10rep
+all_data[[9]] <- pNDC80_species
+all_data[[10]] <- pNDC80_total
+all_data[[11]] <- pH3S10rep
  
 # Change, IN ORDER
+#species_info_list[[1]] <- c("File name for saving plot", "Title on plots with only inactive species", "Title on plots with only active species", "Title on plots with both active and inactive species",
+                            # SUM:"sums of inactive and active species should be added" (Active: Black, Solid & Inactive: Black, Dashed), 
+                            # TOTAL: "sum of all species should be added",
+                            # FULL: "all species should be added to line plots",
+                            # COLLAPSIBLE: "whether only the top 4 species and their sums/total should be specified")
 species_info_list[[1]] <- c("CPC", "Inactive CPC", "Active CPC", "CPC Activation", TRUE, FALSE, FALSE, TRUE)
-species_info_list[[2]] <- c("pH3_species", "Inactive Species", "Active Species", "All Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[3]] <- c("pH2A_species", "Inactive Species", "Active Species", "All Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[4]] <- c("HASPIN_PLK1_species", "Inactive Species", "Active Species", "All Species", FALSE, FALSE, TRUE, FALSE)
-#species_info_list[[5]] <- c("Bub1a_pKnl1_spaecies", "Inactive Species", "Active Species", "All Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[6]] <- c("Sgo1", "Inactive Species", "Active Species", "All Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[7]] <- c("bound_CPC", "Inactive Species", "Active Species", "All Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[8]] <- c("bound_active_CPC", "Inactive Species", "Active Species", "All Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[9]] <- c("pNDC80rep", "Inactive Species", "Active Species", "All Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[10]] <- c("pH3S10rep", "Inactive Species", "Active Species", "All Species", FALSE, FALSE, TRUE, FALSE)
-
+species_info_list[[2]] <- c("pH3_species", "Inactive Species", "Active Species", "pH3 Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[3]] <- c("pH2A_species", "Inactive Species", "Active Species", "pH2A Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[4]] <- c("HASPIN_PLK1_species", "Inactive Species", "Active Species", "HASPIN Activation", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[5]] <- c("Bub1a_pKnl1_species", "Inactive Species", "Active Species", "BUB1 recruitment", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[6]] <- c("Sgo1", "Inactive Species", "Active Species", "SGO1 Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[7]] <- c("bound_CPC", "Inactive Species", "Active Species", "Bound CPC", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[8]] <- c("bound_active_CPC", "Inactive Species", "Active Species", "Bound active CPC", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[9]] <- c("pNDC80_species", "Inactive Species", "Active Species", "pNDC80 Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[10]] <- c("pNDC80_total", "Inactive Species", "Active Species", "SUM of pNDC80 Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[11]] <- c("pH3S10rep", "Inactive Species", "Active Species", "pH3S10 reporter", FALSE, FALSE, TRUE, FALSE)
 
 # ---------------- SIMULATION SPECIFICS ---------------
 
 # Model type, goes on the left of the heatmap
 # Change
 kt_width = c(
-  #"Metacentric_Relaxed",
-  "Metacentric_Relaxed"
-  #"Metacentric_Tensed"
+   # "Telocentric_Relaxed",
+    # "Metacentric_Relaxed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed"
   # "Telocentric_Relaxed"
   # "Telocentric_Tensed"
   # "Acrocentric_Relaxed"
@@ -122,16 +147,53 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  #"SimID_309471052_1__exported",
-  "SimID_309471052_2__exported"
+  "SimID_313182496_0__exported",
+  "SimID_313182496_1__exported",
+  "SimID_313182496_2__exported",
+  "SimID_313182496_3__exported",
+  "SimID_313182496_4__exported",
+  "SimID_313182712_0__exported",
+  "SimID_313182712_1__exported",
+  "SimID_313182712_2__exported",
+  "SimID_313182712_3__exported",
+  "SimID_313182712_4__exported",
+  "SimID_313182712_5__exported",
+  "SimID_313182712_6__exported",
+  "SimID_313182712_7__exported",
+  "SimID_313182712_8__exported",
+  "SimID_313182712_9__exported",
+  "SimID_313182712_10__exported",
+  "SimID_313182712_11__exported",
+  "SimID_313182712_12__exported",
+  "SimID_313182712_13__exported",
+  "SimID_313182712_14__exported",
+  "SimID_313182712_15__exported"
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  #"04_06_26_metacentric_relaxed_MCF10A_chr19_PMP1_alphakt_scan_0.4",
-  "04_06_26_metacentric_relaxed_MCF10A_chr19_PMP1_alphakt_scan_0.7"
-  
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_0P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_5P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_10P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_15P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_20P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_25P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_30P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_35P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_40P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_45P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_50P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_55P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_60P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_65P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_70P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_75P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_80P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_85P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_90P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_95P",
+  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_100P"
 )
 #########################################################
 
@@ -159,8 +221,9 @@ for(i in 1:length(sims)){
                tInit=0,
                tSpan=500, 
                desiredInterval=100,
-               cutoff=list("CPC"=13), #for heatmap color bar
-              #  cutoff=3, #for heatmap color bar
+               # alternative_range <- NULL, #when equal spacing is enough on heatmaps
+               alternative_range <- c(0, 1, 3, 5, 10, 20), #alternative desired time points to be plotted on heatmaps
+               cutoff=list("CPC"=14), #for heatmap color bar
                funcPath,
                importPath,
                exportPath_new,
@@ -175,16 +238,16 @@ for(i in 1:length(sims)){
 
   }
 
-  cpc_data <- get_cumulative_bound_CPC(
-  SimID         = sims[i],
-  tInit         = 0,
-  tSpan         = 500,
-  importPath    = importPath,
-  exportPath    = exportPath_new,
-  dataDim       = dataDim,
-  chromWidth    = chromWidth,
-  chromHeight   = chromHeight,
-  kt_width      = kt_width[i]
-)
+  # cpc_data <- get_cumulative_bound_CPC(
+  # SimID         = sims[i],
+  # tInit         = 0,
+  # tSpan         = 500,
+  # importPath    = importPath,
+  # exportPath    = exportPath_new,
+  # dataDim       = dataDim,
+  # chromWidth    = chromWidth,
+  # chromHeight   = chromHeight,
+  # kt_width      = kt_width[i]
+  # )
 }
 

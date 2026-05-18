@@ -73,8 +73,6 @@ def convert_hdf5_to_csv(
             "pH2A_SGO1",
             "pH2A_SGO1_CPCa",
             "pH2A_SGO1_CPCi",
-            "pH2A_SGO1_pH3_CPCa",
-            "pH2A_SGO1_pH3_CPCi",
             "pH3",
             "pH3_CPCa",
             "pH3_CPCi",
@@ -90,11 +88,10 @@ def convert_hdf5_to_csv(
             "pNDC80_TTKi",
             "pNDC80_pTTKa",
             "pNDC80_pTTKi",
+            "pNDC80_total",
             "SGO1",
 	        "SGO1_CPCi",
             "SGO1_CPCa",
-	        "SGO1_CPCi_pH3",
-	        "SGO1_CPCa_pH3",
             "H3_CPCa",
             "H3_CPCi", 
             "CPC_all",
@@ -102,8 +99,7 @@ def convert_hdf5_to_csv(
 	        "CPCa_total",
             "bound_CPC",
             "bound_active_CPC",
-	        "pNDC80rep",
-	        "pH3S10rep"
+	        "pH3S10rep",
         ]
         print(f"Using default species list of length {len(default_species)}")
     else:
@@ -115,6 +111,7 @@ def convert_hdf5_to_csv(
         for sim_key in h5.keys():
             sim_key_name = "_".join(sim_key.split("[")[1].split("]")[0].split(",")[0:2])
             print(sim_key_name)
+            processed_species = [] 
             output_folder = f"{dir_path}/SimID_{sim_key_name}__exported"
             # make directory if it doesn't exist
             if not os.path.exists(output_folder):
@@ -126,6 +123,7 @@ def convert_hdf5_to_csv(
                         print(key)
                         # convert 3D numpy array to multiple 2D numpy arrays
                         arr = h5[sim_key][key]["DataValues (XYT)"][:]
+                        processed_species.append(key)
                         for i in range(arr.shape[2]):
                             header_text = (
                                 f"Model: {model_name}\n"
@@ -150,9 +148,12 @@ def convert_hdf5_to_csv(
                                 mode="a",
                                 header=False,
                             )
-                    except ValueError:
-                        pass
+                    except (ValueError, KeyError) as e:
+                        print(f"Error processing key {key}: {e}")  
 
+            missing_species = list(set(default_species) - set(processed_species))
+            if missing_species:
+                print(f"WARNING: Missing species:", missing_species)         
 
 if __name__ == "__main__":
     t1 = time.time()

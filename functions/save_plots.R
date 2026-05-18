@@ -9,6 +9,7 @@ save_plots <- function(
     tInit,
     tSpan,
     desiredInterval,
+    alternative_range,
     funcPath,
     importPath,
     exportPath,
@@ -44,6 +45,7 @@ save_plots <- function(
       tSpan=tSpan,
       tInterval=10,
       desiredInterval=desiredInterval,
+      alternative_range,
       importPath=importPath,
       exportPath=exportPath)
 

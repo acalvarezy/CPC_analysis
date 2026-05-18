@@ -8,6 +8,7 @@ vcell_heatmap <- function(
     tSpan, # in s
     tInterval, # in s, what set in VCell
     desiredInterval, # in s, what you want the data to be spaced by
+    alternative_range, #the desired time points to be plotted
     xdiv=3, # number of divisions desired on x axis of output plot
     ydiv=3, # number of divisions desired on y axis of output plot
     importPath="/Users/catalinaalvarez/Google\ Drive/My\ Drive/UVA/Research/JanesLab/CPC_project/Manuscript/Paper_simulations/vcell_data",
@@ -36,9 +37,11 @@ vcell_heatmap <- function(
   # initialize variables
   n_SimID<-length(SimID)
   n_t<-(tSpan-tInit)/desiredInterval+1
-  #trange<-seq(from=tInit/tInterval,to=tSpan/tInterval,length.out=n_t)
-  trange<-c(0, 1, 3, 5, 10, 30)
   
+  if (is.null(alternative_range)) {
+    trange<-seq(from=tInit/tInterval,to=tSpan/tInterval,length.out=n_t)
+    }else {
+    trange <- alternative_range}
   
   plist<-list()
   L <- list()
@@ -148,9 +151,10 @@ vcell_heatmap <- function(
     }
   }
   
-  
-  #t_short<-seq(from=tInit,to=tSpan,length.out=n_t)
-  t_short<-c(0, 10, 30, 50, 100, 300)
+  if (is.null(alternative_range)) {
+    t_short<-seq(from=tInit,to=tSpan,length.out=n_t)
+    }else {
+    t_short = alternative_range*10}
   t_equal_str<-"t (s) ="
   
   t_labs[1] <- paste(t_equal_str,t_short[1])
