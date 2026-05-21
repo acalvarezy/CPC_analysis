@@ -24,7 +24,7 @@ for(i in functions){
 # Chr19 - PMP1
 dataDim=c(144,52)#edited
 chromWidth=1.3 #um
-chromHeight=3.6 #um
+chromHeight=3.4 #um
 
 # ---------------- LISTS OF SPECIES ---------------
 
@@ -116,27 +116,27 @@ species_info_list[[11]] <- c("pH3S10rep", "Inactive Species", "Active Species", 
 kt_width = c(
    # "Telocentric_Relaxed",
     # "Metacentric_Relaxed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed"
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    "Metacentric_Relaxed"
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed"
+  # "Metacentric_Tensed"
   # "Telocentric_Relaxed"
   # "Telocentric_Tensed"
   # "Acrocentric_Relaxed"
@@ -147,53 +147,54 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  "SimID_313182496_0__exported",
-  "SimID_313182496_1__exported",
-  "SimID_313182496_2__exported",
-  "SimID_313182496_3__exported",
-  "SimID_313182496_4__exported",
-  "SimID_313182712_0__exported",
-  "SimID_313182712_1__exported",
-  "SimID_313182712_2__exported",
-  "SimID_313182712_3__exported",
-  "SimID_313182712_4__exported",
-  "SimID_313182712_5__exported",
-  "SimID_313182712_6__exported",
-  "SimID_313182712_7__exported",
-  "SimID_313182712_8__exported",
-  "SimID_313182712_9__exported",
-  "SimID_313182712_10__exported",
-  "SimID_313182712_11__exported",
-  "SimID_313182712_12__exported",
-  "SimID_313182712_13__exported",
-  "SimID_313182712_14__exported",
-  "SimID_313182712_15__exported"
+  # "SimID_313779016_0__exported",
+  # "SimID_313779016_1__exported",
+  # "SimID_313779016_2__exported",
+  # "SimID_313779016_3__exported",
+  # "SimID_313779016_4__exported",
+  "SimID_313182496_2__exported"
+  # "SimID_313779013_1__exported",
+  # "SimID_313779013_2__exported",
+  # "SimID_313779013_3__exported",
+  # "SimID_313779013_4__exported",
+  # "SimID_313779013_5__exported",
+  # "SimID_313779013_6__exported",
+  # "SimID_313779013_7__exported",
+  # "SimID_313779013_8__exported",
+  # "SimID_313779013_9__exported",
+  # "SimID_313779013_10__exported",
+  # "SimID_313779013_11__exported",
+  # "SimID_313779013_12__exported",
+  # "SimID_313779013_13__exported",
+  # "SimID_313779013_14__exported",
+  # "SimID_313779013_15__exported"
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_0P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_5P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_10P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_15P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_20P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_25P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_30P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_35P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_40P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_45P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_50P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_55P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_60P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_65P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_70P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_75P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_80P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_85P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_90P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_95P",
-  "05_08_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_100P"
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_0P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_5P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_10P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_15P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_20P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_25P"
+  "test"
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_30P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_35P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_40P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_45P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_50P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_55P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_60P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_65P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_70P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_75P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_80P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_85P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_90P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_95P",
+  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_100P"
 )
 #########################################################
 
@@ -223,7 +224,7 @@ for(i in 1:length(sims)){
                desiredInterval=100,
                # alternative_range <- NULL, #when equal spacing is enough on heatmaps
                alternative_range <- c(0, 1, 3, 5, 10, 20), #alternative desired time points to be plotted on heatmaps
-               cutoff=list("CPC"=14), #for heatmap color bar
+               cutoff=list("CPC"=12), #for heatmap color bar
                funcPath,
                importPath,
                exportPath_new,
