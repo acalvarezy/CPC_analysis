@@ -79,19 +79,19 @@ line_plot <- function(
   pixels_per_um <- dataDim[1] / chromHeight
   
   if (grepl("metacentric", kt_width, ignore.case = TRUE)) {
-    # 0.3 um tall, centered vertically in the matrix
+    # 0.3 um tall, centered vertically in the matrix (Calculations for Chr19)
     half_px <- (KT_height / 2) * pixels_per_um #6
-    center_px <- dataDim[1] / 2 #72
-    y1_new <- ceiling(center_px - half_px) + 1 #66 --> 67
-    y2_new <- floor(center_px + half_px) #78
-    y1_bg_new <- ceiling((y1_new/2) - half_px) #28
-    y2_bg_new <- floor((y1_new/2) + half_px) #39
+    center_px <- dataDim[1] / 2 #68
+    y1_new <- ceiling(center_px - half_px) + 1 #63
+    y2_new <- floor(center_px + half_px) #74
+    y1_bg_new <- ceiling((y1_new/2) - half_px) #26
+    y2_bg_new <- floor((y1_new/2) + half_px) #37
     
     # clamp to valid indices
-    y1 <- max(1, y1_new) # 67
-    y2 <- min(dataDim[1], y2_new) #78
-    y1_bg <- max(1, y1_bg_new) # 28
-    y2_bg <- min(dataDim[1], y2_bg_new) #39
+    y1 <- max(1, y1_new) # 63
+    y2 <- min(dataDim[1], y2_new) #74
+    y1_bg <- max(1, y1_bg_new) #26 
+    y2_bg <- min(dataDim[1], y2_bg_new) #37
     
   } else if (grepl("telocentric", kt_width, ignore.case = TRUE)) {
     # from 0 um (top) to 0.3 um

@@ -22,7 +22,7 @@ for(i in functions){
 
 #CHANGE: Chromosome geometry
 # Chr19 - PMP1
-dataDim=c(144,52)#edited
+dataDim=c(136,52)#edited
 chromWidth=1.3 #um
 chromHeight=3.4 #um
 
@@ -116,27 +116,27 @@ species_info_list[[11]] <- c("pH3S10rep", "Inactive Species", "Active Species", 
 kt_width = c(
    # "Telocentric_Relaxed",
     # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    "Metacentric_Relaxed"
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed"
-  # "Metacentric_Tensed"
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed",
+  "Metacentric_Tensed"
   # "Telocentric_Relaxed"
   # "Telocentric_Tensed"
   # "Acrocentric_Relaxed"
@@ -147,54 +147,53 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  # "SimID_313779016_0__exported",
-  # "SimID_313779016_1__exported",
-  # "SimID_313779016_2__exported",
-  # "SimID_313779016_3__exported",
-  # "SimID_313779016_4__exported",
-  "SimID_313182496_2__exported"
-  # "SimID_313779013_1__exported",
-  # "SimID_313779013_2__exported",
-  # "SimID_313779013_3__exported",
-  # "SimID_313779013_4__exported",
-  # "SimID_313779013_5__exported",
-  # "SimID_313779013_6__exported",
-  # "SimID_313779013_7__exported",
-  # "SimID_313779013_8__exported",
-  # "SimID_313779013_9__exported",
-  # "SimID_313779013_10__exported",
-  # "SimID_313779013_11__exported",
-  # "SimID_313779013_12__exported",
-  # "SimID_313779013_13__exported",
-  # "SimID_313779013_14__exported",
-  # "SimID_313779013_15__exported"
+  "SimID_313875394_0__exported",
+  "SimID_313875394_1__exported",
+  "SimID_313875394_2__exported",
+  "SimID_313875394_3__exported",
+  "SimID_313875394_4__exported",
+  "SimID_313875396_0__exported",
+  "SimID_313875396_1__exported",
+  "SimID_313875396_2__exported",
+  "SimID_313875396_3__exported",
+  "SimID_313875396_4__exported",
+  "SimID_313875396_5__exported",
+  "SimID_313875396_6__exported",
+  "SimID_313875396_7__exported",
+  "SimID_313875396_8__exported",
+  "SimID_313875396_9__exported",
+  "SimID_313875396_10__exported",
+  "SimID_313875396_11__exported",
+  "SimID_313875396_12__exported",
+  "SimID_313875396_13__exported",
+  "SimID_313875396_14__exported",
+  "SimID_313875396_15__exported"
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_0P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_5P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_10P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_15P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_20P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_25P"
-  "test"
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_30P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_35P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_40P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_45P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_50P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_55P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_60P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_65P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_70P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_75P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_80P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_85P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_90P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_95P",
-  # "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_100P"
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_0P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_5P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_10P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_15P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_20P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_25P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_30P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_35P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_40P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_45P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_50P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_55P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_60P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_65P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_70P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_75P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_80P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_85P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_90P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_95P",
+  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_100P"
 )
 #########################################################
 
