@@ -47,8 +47,8 @@ def plot_across_models(species, plot_list, in_dir,  name_list = [], location = '
     print(plot_data.loc[plot_data["Time"]==500][column])
     ax = sns.lineplot(x = plot_data['Time'], y= plot_data[column], hue = plot_data['parameter'], palette="magma")
     # hue = plot_data['parameter'].to_numpy()  --> palette = "crest"
-    ax.set_xlim(0,200)
-    ax.set_ylim(4,15)
+    ax.set_xlim(0,500)
+    ax.set_ylim(0,480)
 
     plt.xlabel("Time (s)")
     if name is not None:
@@ -64,7 +64,12 @@ def plot_across_models(species, plot_list, in_dir,  name_list = [], location = '
 
 #Change legend labels here following simulation order:
     L=ax.legend()
-    L.get_texts()[0].set_text('Metacentric ref')
+    L.get_texts()[0].set_text(r'Relaxed ref. kppKT = 0.01 $s^{-1}$')
+    L.get_texts()[1].set_text(r'kppKT = 0.03 $s^{-1}$')
+    L.get_texts()[2].set_text(r'kppKT = 0.05 $s^{-1}$')
+    L.get_texts()[3].set_text(r'kppKT = 0.1 $s^{-1}$')
+    # L.get_texts()[4].set_text(r'No feedbacks-Activation')
+    # L.get_texts()[5].set_text(r'No feedbacks-Activation-CPCa_t0s')
     # L.get_texts()[1].set_text('SGO1 50%'),
     # L.get_texts()[2].set_text('HASPIN 50%'),
     # L.get_texts()[3].set_text('SGO1 50% & HASPIN 50%')
@@ -95,10 +100,27 @@ name_folder = "cata"
 in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026"
 
 plot_list = [
-            "test"]
+            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_50P",
+            "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kppKT_0.03",
+            "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kppKT_0.05",
+            "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kppKT_0.1"
+            # "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kcat",
+            # "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kcat_CPCa"
 
-plot_across_models('CPC', plot_list, in_dir_, location='ic',name_plot="test",active= 'all')
-plot_across_models('CPC', plot_list, in_dir_, location='kt',name_plot="test",active= 'all')
-plot_across_models('CPC', plot_list, in_dir_, location='bg',name_plot="test",active= 'all')
 
+            # "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_50P",
+            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kppKT_0.03",
+            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kppKT_0.05",
+            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kppKT_0.1",
+            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kcat",
+            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kcat_CPCa"
+
+
+
+
+            ]
+
+plot_across_models('pNDC80_total', plot_list, in_dir_, location='ic',name_plot="05_30_26_relaxed_kppKT_500s",active= 'all')
+plot_across_models('pNDC80_total', plot_list, in_dir_, location='kt',name_plot="05_30_26_relaxed_kppKT_500s",active= 'all')
+plot_across_models('pNDC80_total', plot_list, in_dir_, location='bg',name_plot="05_30_26_relaxed_kppKT_500s",active= 'all')
 

@@ -31,6 +31,7 @@ chromHeight=3.4 #um
 # Species Lists, add any that are required to be on one plot
 
 CPC_species <-c("CPCa", "pH2A_SGO1_CPCa", "H3_CPCa", "pH3_CPCa", "SGO1_CPCa", "CPCi", "pH2A_SGO1_CPCi", "H3_CPCi", "pH3_CPCi", "SGO1_CPCi")
+CPCa_total <-c("CPCa_total")
 pH3_species <- c("pH3", "pH3_CPCa", "pH3_CPCi")
 pH2A_species <- c("pH2A", "pH2A_SGO1", "pH2A_SGO1_CPCa", "pH2A_SGO1_CPCi")
 HASPIN_PLK1_species <- c("HASPINa", "HASPINi", "PLK1a", "PLK1i")
@@ -71,25 +72,26 @@ heatmap_info_list[[7]] <- c("all pH3S10rep")
 
 
 # ---------------- LINE PLOTS ---------------
-L <- 11
+L <- 12
  
 all_data <- vector("list", L)
 species_info_list <- vector("list", L)
-all_species <- c(CPC_species, pH3_species, pH2A_species, HASPIN_PLK1_species, BUB1a_pKNL1_species, SGO1_species, bound_CPC, bound_active_CPC, pNDC80_species, pNDC80_total, pH3S10rep)
+all_species <- c(CPC_species, CPCa_total, pH3_species, pH2A_species, HASPIN_PLK1_species, BUB1a_pKNL1_species, SGO1_species, bound_CPC, bound_active_CPC, pNDC80_species, pNDC80_total, pH3S10rep)
 
 
 # Change, IN ORDER
 all_data[[1]] <- CPC_species
-all_data[[2]] <- pH3_species
-all_data[[3]] <- pH2A_species
-all_data[[4]] <- HASPIN_PLK1_species
-all_data[[5]] <- BUB1a_pKNL1_species
-all_data[[6]] <- SGO1_species
-all_data[[7]] <- bound_CPC
-all_data[[8]] <- bound_active_CPC
-all_data[[9]] <- pNDC80_species
-all_data[[10]] <- pNDC80_total
-all_data[[11]] <- pH3S10rep
+all_data[[2]] <- CPCa_total
+all_data[[3]] <- pH3_species
+all_data[[4]] <- pH2A_species
+all_data[[5]] <- HASPIN_PLK1_species
+all_data[[6]] <- BUB1a_pKNL1_species
+all_data[[7]] <- SGO1_species
+all_data[[8]] <- bound_CPC
+all_data[[9]] <- bound_active_CPC
+all_data[[10]] <- pNDC80_species
+all_data[[11]] <- pNDC80_total
+all_data[[12]] <- pH3S10rep
  
 # Change, IN ORDER
 #species_info_list[[1]] <- c("File name for saving plot", "Title on plots with only inactive species", "Title on plots with only active species", "Title on plots with both active and inactive species",
@@ -98,16 +100,17 @@ all_data[[11]] <- pH3S10rep
                             # FULL: "all species should be added to line plots",
                             # COLLAPSIBLE: "whether only the top 4 species and their sums/total should be specified")
 species_info_list[[1]] <- c("CPC", "Inactive CPC", "Active CPC", "CPC Activation", TRUE, FALSE, FALSE, TRUE)
-species_info_list[[2]] <- c("pH3_species", "Inactive Species", "Active Species", "pH3 Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[3]] <- c("pH2A_species", "Inactive Species", "Active Species", "pH2A Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[4]] <- c("HASPIN_PLK1_species", "Inactive Species", "Active Species", "HASPIN Activation", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[5]] <- c("Bub1a_pKnl1_species", "Inactive Species", "Active Species", "BUB1 recruitment", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[6]] <- c("Sgo1", "Inactive Species", "Active Species", "SGO1 Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[7]] <- c("bound_CPC", "Inactive Species", "Active Species", "Bound CPC", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[8]] <- c("bound_active_CPC", "Inactive Species", "Active Species", "Bound active CPC", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[9]] <- c("pNDC80_species", "Inactive Species", "Active Species", "pNDC80 Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[10]] <- c("pNDC80_total", "Inactive Species", "Active Species", "SUM of pNDC80 Species", FALSE, FALSE, TRUE, FALSE)
-species_info_list[[11]] <- c("pH3S10rep", "Inactive Species", "Active Species", "pH3S10 reporter", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[2]] <- c("CPCa_total", "Inactive Species", "Active Species", "SUM of CPCa species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[3]] <- c("pH3_species", "Inactive Species", "Active Species", "pH3 Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[4]] <- c("pH2A_species", "Inactive Species", "Active Species", "pH2A Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[5]] <- c("HASPIN_PLK1_species", "Inactive Species", "Active Species", "HASPIN Activation", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[6]] <- c("Bub1a_pKnl1_species", "Inactive Species", "Active Species", "BUB1 recruitment", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[7]] <- c("Sgo1", "Inactive Species", "Active Species", "SGO1 Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[8]] <- c("bound_CPC", "Inactive Species", "Active Species", "Bound CPC", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[9]] <- c("bound_active_CPC", "Inactive Species", "Active Species", "Bound active CPC", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[10]] <- c("pNDC80_species", "Inactive Species", "Active Species", "pNDC80 Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[11]] <- c("pNDC80_total", "Inactive Species", "Active Species", "SUM of pNDC80 Species", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[12]] <- c("pH3S10rep", "Inactive Species", "Active Species", "pH3S10 reporter", FALSE, FALSE, TRUE, FALSE)
 
 # ---------------- SIMULATION SPECIFICS ---------------
 
@@ -115,28 +118,8 @@ species_info_list[[11]] <- c("pH3S10rep", "Inactive Species", "Active Species", 
 # Change
 kt_width = c(
    # "Telocentric_Relaxed",
-    # "Metacentric_Relaxed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed",
-  "Metacentric_Tensed"
+    "Metacentric_Relaxed"
+    # "Metacentric_Tensed"
   # "Telocentric_Relaxed"
   # "Telocentric_Tensed"
   # "Acrocentric_Relaxed"
@@ -147,53 +130,18 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  "SimID_313875394_0__exported",
-  "SimID_313875394_1__exported",
-  "SimID_313875394_2__exported",
-  "SimID_313875394_3__exported",
-  "SimID_313875394_4__exported",
-  "SimID_313875396_0__exported",
-  "SimID_313875396_1__exported",
-  "SimID_313875396_2__exported",
-  "SimID_313875396_3__exported",
-  "SimID_313875396_4__exported",
-  "SimID_313875396_5__exported",
-  "SimID_313875396_6__exported",
-  "SimID_313875396_7__exported",
-  "SimID_313875396_8__exported",
-  "SimID_313875396_9__exported",
-  "SimID_313875396_10__exported",
-  "SimID_313875396_11__exported",
-  "SimID_313875396_12__exported",
-  "SimID_313875396_13__exported",
-  "SimID_313875396_14__exported",
-  "SimID_313875396_15__exported"
+  # "SimID_314758221_0__exported",
+  # "SimID_314758224_0__exported",
+  "SimID_314757873_0__exported"
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_0P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_5P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_10P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_15P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_20P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_25P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_30P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_35P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_40P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_45P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_50P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_55P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_60P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_65P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_70P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_75P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_80P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_85P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_90P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_95P",
-  "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_100P"
+  # "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kcat",
+  # "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kcat_CPCa"
+  "test"
+  
 )
 #########################################################
 

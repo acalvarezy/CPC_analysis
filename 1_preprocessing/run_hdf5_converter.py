@@ -1,5 +1,4 @@
 #%%
-
 import os
 import numpy as np
 import subprocess
@@ -10,16 +9,16 @@ os.chdir(new_directory_path)
 
 #Update the simulation data
 models = np.array([
-    "005_20_26 CPC_metacentric_tensed_MCF10A_chr19_PMP1"
+    "05_20_26 CPC_metacentric_tensed_MCF10A_chr19_PMP1"
 	])
 
 
 simulations = np.array([
-	 "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_75P"
+	 "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kppKT"
         ])
  
 simID = np.array([ 
-	"SimID_313875396_5__exported"
+	"SimID_314758240_0__exported"
         ])
 
 for i in range(len(models)):
