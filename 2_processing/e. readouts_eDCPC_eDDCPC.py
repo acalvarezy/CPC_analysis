@@ -9,121 +9,134 @@ import matplotlib.pyplot as plt
 import os
 import re
 
-#SIMULATIONS READOUTS COMPARISON - DCPC
+#SIMULATIONS READOUTS COMPARISON - eDCPC
 def plot_across_models(species, plot_list, in_dir, location, timepoint, name_list = [], column = "Sum_Active", active = 'active',
                         name = None, name_plot="", name_folder =""):
     print("Plotting across models")
-
-    #DCPC
-    if os.path.isdir(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DCPC/{name_folder}"):
+    
+    #eDCPC
+    if os.path.isdir(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/eDCPC/{name_folder}"):
         pass
     else:
-        os.makedirs(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DCPC/{name_folder}")
+        os.makedirs(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/eDCPC/{name_folder}")
         print(f"Made folder {name_folder}")
-
     if len(name_list) == 0:
         name_list = plot_list 
     if active == 'all':
         tag = 0
-        df = pd.DataFrame(columns=["state", "percentage", "DCPC"])
+        df = pd.DataFrame(columns=["state", "percentage", "eDCPC"])
         for n, p in zip(name_list,plot_list):
             tmpc = pd.DataFrame()
             for z in location:
-                    if z in ['kt', 'ic']:
-                        tmp1 = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
-                        tmp1['Time'] = 10*tmp1['Time']
-                        tmp1['parameter'] = n
-                        tmp1['all'] = tmp1[list(set(tmp1.columns).difference({"Time",'parameter'}))].sum(axis = 1)
+                    if z == 'kt':
+                        tmpkt = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
+                        tmpkt['Time'] = 10*tmpkt['Time']
+                        tmpkt['parameter'] = n
+                        tmpkt['all'] = tmpkt[list(set(tmpkt.columns).difference({"Time",'parameter'}))].sum(axis = 1)
+
+                    if z == 'ic':
+                        tmpic = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
+                        tmpic['parameter'] = n
+                        tmpic['all'] = tmpic[list(set(tmpic.columns).difference({"Time",'parameter'}))].sum(axis = 1)
+
+                    if z == 'bg':
+                        tmpbg = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
+                        tmpbg['parameter'] = n
+                        tmpbg['all'] = tmpbg[list(set(tmpbg.columns).difference({"Time",'parameter'}))].sum(axis = 1)    
                                      
                     else:
-                        tmp2 = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
-                        tmp2['all'] = tmp2[list(set(tmp2.columns).difference({"Time",'parameter'}))].sum(axis = 1)
-                            
-            tmpc['Time'] = tmp1['Time']
-            tmpc['parameter'] = tmp1['parameter']
-            tmpc['bg_corrected'] = tmp1['all'] - tmp2['all']
+                        tmpch = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
+                        tmpch['parameter'] = n
+                        tmpch['all'] = tmpch[list(set(tmpch.columns).difference({"Time",'parameter'}))].sum(axis = 1)
+
+             
+            tmpc['Time'] = tmpkt['Time']
+            tmpc['parameter'] = tmpkt['parameter']
+            tmpc['ecDCPC'] = (tmpic['all'] - tmpkt['all'] - tmpch['all'] + tmpbg['all']) / tmpbg['all']
+            
+          ####Here
+
+
             state = re.search(r"metacentric_([^_]+)_MCF", n).group(1)
             percentage = int(re.search(r"arms_([^_]+)P", n).group(1)) #TO EDIT depending on the simulation scan
-            DCPC = tmpc.loc[tmpc['Time'] == timepoint, 'bg_corrected'].values[0]
+            eDCPC = tmpc.loc[tmpc['Time'] == timepoint, 'ecDCPC'].values[0]
 
-            df.loc[len(df)] = [state, percentage, DCPC]
+            df.loc[len(df)] = [state, percentage, eDCPC]
 
         print(df)
-        df.to_excel(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DCPC/{name_plot}_{location[0]}_at_{timepoint}s.xlsx")
+        print(len(df))
+        df.to_excel(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/ecDCPC/{name_plot}_{location[0]}_at_{timepoint}s.xlsx")
 
         fig = plt.figure(figsize = (5,4.5))
-        sns.lineplot(data=df, x="percentage", y="DCPC", hue="state", marker="o", markersize=3, palette="magma", linewidth=3)
-        plt.ylabel(fr'$\Delta CPC$ [$\mu$M]', fontsize=12)
+        sns.lineplot(data=df, x="percentage", y="ecDCPC", hue="state", marker="o", markersize=3, palette="magma", linewidth=3)
+        plt.ylabel(fr'ecDCPC', fontsize=12)
         plt.xlabel("acH2A at the arms (%)", fontsize=12)
         plt.legend(title="Chromosome state")
-        if location[0] == "ic":
-            plt.title(fr"$\Delta CPC$ at inner centromere ({timepoint} s)")
-        else: 
-            plt.title(fr"$\Delta CPC$ at kinetochores ({timepoint} s)")    
-        plt.savefig(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DCPC/{name_plot}_{location[0]}_at_{timepoint}s.pdf")
+        plt.title(fr"time = ({timepoint} s)")
+        plt.savefig(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/ecDCPC/{name_plot}_{location[0]}_at_{timepoint}s.pdf")
+        
 
-
-    #DDCPC
-        if os.path.isdir(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DDCPC/{name_folder}"):
+        #DfcCPC
+        if os.path.isdir(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DfcCPC/{name_folder}"):
                 pass
         else:
-            os.makedirs(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DDCPC/{name_folder}")
+            os.makedirs(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DfcCPC/{name_folder}")
             print(f"Made folder {name_folder}")
-
-        df2 = pd.DataFrame(columns=["state", "percentage", "DDCPC"])
+        df2 = pd.DataFrame(columns=["state", "percentage", "DfcCPC"])
         for i in range(0, len(df), 2): 
             state = "relaxed - tensed"
             percentage =  df['percentage'].iloc[i]
-            DDCPC =  df['DCPC'].iloc[i] - df['DCPC'].iloc[i+1]
-            df2.loc[len(df2)] = [state, percentage, DDCPC]
+            DfcCPC =  df['fcCPC'].iloc[i] - df['fcCPC'].iloc[i+1]
+            df2.loc[len(df2)] = [state, percentage, DfcCPC]
 
         print(df2)
-        df2.to_excel(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DDCPC/{name_plot}_{location[0]}_at_{timepoint}s.xlsx")
+        df2.to_excel(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DfcCPC/{name_plot}_{location[0]}_at_{timepoint}s.xlsx")
 
         fig = plt.figure(figsize = (5,4.5))
-        sns.lineplot(data=df2, x="percentage", y="DDCPC", marker="o", markersize=3, palette="magma", linewidth=3)
-        plt.ylabel(fr'$\Delta\Delta CPC$ [$\mu$M]', fontsize=12)
+        sns.lineplot(data=df2, x="percentage", y="DfcCPC", marker="o", markersize=3, palette="magma", linewidth=3)
+        plt.ylabel(fr'$\Delta fcCPC$', fontsize=12)
         plt.xlabel("acH2A at the arms (%)", fontsize=12)
         if location[0] == "ic":
-            plt.title(fr"$\Delta\Delta CPC$ at inner centromere ({timepoint} s)")
+            plt.title(fr"$\Delta fcCPC$ at inner centromere ({timepoint} s)")
         else: 
-            plt.title(fr"$\Delta\Delta CPC$ at kinetochores ({timepoint} s)")    
-        plt.savefig(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DDCPC/{name_plot}_{location[0]}_at_{timepoint}s.pdf")
+            plt.title(fr"$\Delta fcCPC$ at kinetochores ({timepoint} s)")    
+        plt.savefig(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DfcCPC/{name_plot}_{location[0]}_at_{timepoint}s.pdf")
 
 
-    #fcDCPC
-        if os.path.isdir(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/fcDCPC/{name_folder}"):
+        #fcfcCPC
+        if os.path.isdir(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/fcfcDCPC/{name_folder}"):
                 pass
         else:
-            os.makedirs(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/fcDCPC/{name_folder}")
+            os.makedirs(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/fcfcDCPC/{name_folder}")
             print(f"Made folder {name_folder}")
 
-        df3 = pd.DataFrame(columns=["state", "percentage", "fcDCPC"])
+        df3 = pd.DataFrame(columns=["state", "percentage", "fcfcCPC"])
         for i in range(0, len(df), 2): 
             state = "relaxed - tensed"
             percentage =  df['percentage'].iloc[i]
-            fcDCPC =  df['DCPC'].iloc[i] / df['DCPC'].iloc[i+1]
-            df3.loc[len(df3)] = [state, percentage, fcDCPC]
+            fcfcCPC =  df['fcCPC'].iloc[i] / df['fcCPC'].iloc[i+1]
+            df3.loc[len(df3)] = [state, percentage, fcfcCPC]
 
         print(df3)
-        df3.to_excel(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/fcDCPC/{name_plot}_{location[0]}_at_{timepoint}s.xlsx")
+        df3.to_excel(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/fcfcCPC/{name_plot}_{location[0]}_at_{timepoint}s.xlsx")
 
-        fig = plt.figure(figsize = (6.5,4.5))
-        sns.lineplot(data=df3, x="percentage", y="fcDCPC", marker="o", markersize=3, palette="magma", linewidth=3)
-        plt.ylabel(fr'fc$\Delta CPC$', fontsize=12)
+        fig = plt.figure(figsize = (5.5,4.5))
+        sns.lineplot(data=df3, x="percentage", y="fcfcCPC", marker="o", markersize=3, palette="magma", linewidth=3)
+        plt.ylabel(fr'fcfcCPC', fontsize=12)
         plt.xlabel("acH2A at the arms (%)", fontsize=12)
         # plt.ylim(1.7,2)
         if location[0] == "ic":
-            plt.title(fr"fc$\Delta CPC$ at inner centromere ({timepoint} s)")
+            plt.title(fr"fcfcCPC at inner centromere ({timepoint} s)")
         else: 
-            plt.title(fr"fc$\Delta CPC$ at kinetochores ({timepoint} s)")    
-        plt.savefig(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/fcDCPC/{name_plot}_{location[0]}_at_{timepoint}s.pdf")
+            plt.title(fr"fcfcCPC at kinetochores ({timepoint} s)")    
+        plt.savefig(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/fcfcCPC/{name_plot}_{location[0]}_at_{timepoint}s.pdf")
 
 
     else: 
         print("Check needed species or complete this code")
 
 
+    
 name_folder = "folder"
 in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026"
 plot_list = [
@@ -171,7 +184,7 @@ plot_list = [
             "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_100P"
                                             ]
 
-location = ["ic", #change region of interest
+location = ["kt",  #change region of interest
             "bg"
                 ]
 

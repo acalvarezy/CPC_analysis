@@ -31,20 +31,18 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
                     if z in ['kt', 'ic']:
                         tmp1 = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
                         tmp1['Time'] = 10*tmp1['Time']
-                        tmp1['parameter'] = n + z
+                        tmp1['parameter'] = n
                         tmp1['all'] = tmp1[list(set(tmp1.columns).difference({"Time",'parameter'}))].sum(axis = 1)
                                      
                     else:
                         tmp2 = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
-                        tmp2['Time'] = 10*tmp2['Time']
-                        tmp2['parameter'] = n + z
                         tmp2['all'] = tmp2[list(set(tmp2.columns).difference({"Time",'parameter'}))].sum(axis = 1)
                             
             tmpc['Time'] = tmp1['Time']
             tmpc['parameter'] = tmp1['parameter']
             tmpc['bg_corrected'] = tmp1['all'] / tmp2['all']
             state = re.search(r"metacentric_([^_]+)_MCF", n).group(1)
-            percentage = int(re.search(r"arms_([^_]+)P", n).group(1))
+            percentage = int(re.search(r"arms_([^_]+)P", n).group(1)) #TO EDIT depending on the simulation scan
             fcCPC = tmpc.loc[tmpc['Time'] == timepoint, 'bg_corrected'].values[0]
 
             df.loc[len(df)] = [state, percentage, fcCPC]

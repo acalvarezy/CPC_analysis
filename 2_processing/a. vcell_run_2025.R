@@ -118,7 +118,18 @@ species_info_list[[12]] <- c("pH3S10rep", "Inactive Species", "Active Species", 
 # Change
 kt_width = c(
    # "Telocentric_Relaxed",
+    # "Metacentric_Relaxed",
+    "Metacentric_Relaxed",
+    "Metacentric_Relaxed",
+    "Metacentric_Relaxed",
+    "Metacentric_Relaxed",
+    "Metacentric_Relaxed",
     "Metacentric_Relaxed"
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed"
+    # "Metacentric_Tensed",
+    # "Metacentric_Tensed",
     # "Metacentric_Tensed"
   # "Telocentric_Relaxed"
   # "Telocentric_Tensed"
@@ -130,17 +141,24 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  # "SimID_314758221_0__exported",
-  # "SimID_314758224_0__exported",
-  "SimID_314757873_0__exported"
+  "SimID_314795442_0__exported",
+  "SimID_314788124_1__exported",
+  "SimID_314788124_2__exported",
+  "SimID_314795442_1__exported",
+  "SimID_314788124_4__exported",
+  "SimID_314788124_5__exported"
+  
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  # "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kcat",
-  # "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kcat_CPCa"
-  "test"
+  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_0.1x_acH2A75P",
+  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_0.2x_acH2A75P",
+  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_0.5x_acH2A75P",
+  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_2x_acH2A75P",
+  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_5x_acH2A75P",
+  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_10x_acH2A75P"
   
 )
 #########################################################

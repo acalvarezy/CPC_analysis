@@ -48,7 +48,7 @@ def plot_across_models(species, plot_list, in_dir,  name_list = [], location = '
     ax = sns.lineplot(x = plot_data['Time'], y= plot_data[column], hue = plot_data['parameter'], palette="magma")
     # hue = plot_data['parameter'].to_numpy()  --> palette = "crest"
     ax.set_xlim(0,500)
-    ax.set_ylim(0,480)
+    ax.set_ylim(0,14)
 
     plt.xlabel("Time (s)")
     if name is not None:
@@ -64,28 +64,16 @@ def plot_across_models(species, plot_list, in_dir,  name_list = [], location = '
 
 #Change legend labels here following simulation order:
     L=ax.legend()
-    L.get_texts()[0].set_text(r'Relaxed ref. kppKT = 0.01 $s^{-1}$')
-    L.get_texts()[1].set_text(r'kppKT = 0.03 $s^{-1}$')
-    L.get_texts()[2].set_text(r'kppKT = 0.05 $s^{-1}$')
-    L.get_texts()[3].set_text(r'kppKT = 0.1 $s^{-1}$')
-    # L.get_texts()[4].set_text(r'No feedbacks-Activation')
-    # L.get_texts()[5].set_text(r'No feedbacks-Activation-CPCa_t0s')
-    # L.get_texts()[1].set_text('SGO1 50%'),
-    # L.get_texts()[2].set_text('HASPIN 50%'),
-    # L.get_texts()[3].set_text('SGO1 50% & HASPIN 50%')
-    # L.get_texts()[1].set_text('Telocentric ref')
-    # L.get_texts()[1].set_text('SGO1 50% Tel')
-    # L.get_texts()[2].set_text('HASPIN 50% Tel') 
-    # L.get_texts()[2].set_text('PLK1 70%')
-    # L.get_texts()[2].set_text('CPC 70%') 
-    # L.get_texts()[2].set_text('TTK 70%')
-    # L.get_texts()[2].set_text('BUB1 70%')
-    # L.get_texts()[2].set_text('SGO1 & HASPIN 70% Tel')
-    # L.get_texts()[3].set_text('SGO1 & HASPIN 70% Met')
-    # L.get_texts()[3].set_text('SGO1 & PLK1 70%') 
-    # L.get_texts()[3].set_text('SGO1 & CPC 70%')
-    # L.get_texts()[3].set_text('SGO1 & TTK 70%')
-    # L.get_texts()[3].set_text('SGO1 & BUB1 70%')
+    # L.get_texts()[0].set_text('Relaxed SGO1 0x')
+    L.get_texts()[0].set_text('Relaxed SGO1 0.1x')
+    L.get_texts()[1].set_text('Relaxed SGO1 0.2x')
+    L.get_texts()[2].set_text('Relaxed SGO1 0.5x')
+    L.get_texts()[3].set_text('Relaxed SGO1 1x')
+    L.get_texts()[4].set_text('Relaxed SGO1 2x')
+    L.get_texts()[5].set_text('Relaxed SGO1 5x')
+    L.get_texts()[6].set_text('Relaxed SGO1 10x')
+
+
     
     sns.move_legend(ax, "best", labelspacing = 0.01, fontsize='7')
     plt.setp(plt.gca().get_legend().get_texts())
@@ -100,27 +88,23 @@ name_folder = "cata"
 in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026"
 
 plot_list = [
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_50P",
-            "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kppKT_0.03",
-            "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kppKT_0.05",
-            "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kppKT_0.1"
-            # "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kcat",
-            # "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_kcat_CPCa"
-
-
-            # "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_50P",
-            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kppKT_0.03",
-            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kppKT_0.05",
-            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kppKT_0.1",
-            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kcat",
-            # "05_30_26_metacentric_tensed_MCF10A_chr19_PMP1_kcat_CPCa"
-
-
+            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_0.1x",
+            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_0.2x",
+            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_0.5x",
+            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_1x",
+            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_2x",
+            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_5x",
+            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_10x"         
 
 
             ]
 
-plot_across_models('pNDC80_total', plot_list, in_dir_, location='ic',name_plot="05_30_26_relaxed_kppKT_500s",active= 'all')
-plot_across_models('pNDC80_total', plot_list, in_dir_, location='kt',name_plot="05_30_26_relaxed_kppKT_500s",active= 'all')
-plot_across_models('pNDC80_total', plot_list, in_dir_, location='bg',name_plot="05_30_26_relaxed_kppKT_500s",active= 'all')
+# toplotsp = ["CPC", "CPCa_total", "pNDC80_total"]
+
+# for x in toplotsp:
+plot_across_models("CPC", plot_list, in_dir_, location='ic',name_plot="06_01_26_relaxed_SGO1_kpp",active= 'all')
+plot_across_models("CPC", plot_list, in_dir_, location='kt',name_plot="06_01_26_relaxed_SGO1_kpp",active= 'all')
+plot_across_models("CPC", plot_list, in_dir_, location='bg',name_plot="06_01_26_relaxed_SGO1_kpp",active= 'all')
+plot_across_models("CPC", plot_list, in_dir_, location='ch',name_plot="06_01_26_relaxed_SGO1_kpp",active= 'all')
+
 
