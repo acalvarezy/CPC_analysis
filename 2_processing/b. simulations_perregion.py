@@ -6,7 +6,7 @@ Created on Tue Nov  4 21:40:23 2025
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-in_dir = "/Users/catalinaalvarez/Documents/CPC_plots_2026"
+in_dir = "/Users/catalinaalvarez/Documents/CPC_plots_2026/deep_dive"
 import os
 
 #SIMULATIONS COMPARISON - Individual plotting of chromosome regions (IC or KT or BG) 
@@ -46,9 +46,8 @@ def plot_across_models(species, plot_list, in_dir,  name_list = [], location = '
     fig = plt.figure(figsize = (4,3))
     print(plot_data.loc[plot_data["Time"]==500][column])
     ax = sns.lineplot(x = plot_data['Time'], y= plot_data[column], hue = plot_data['parameter'], palette="magma")
-    # hue = plot_data['parameter'].to_numpy()  --> palette = "crest"
     ax.set_xlim(0,500)
-    ax.set_ylim(0,14)
+    ax.set_ylim(0,470)
 
     plt.xlabel("Time (s)")
     if name is not None:
@@ -64,17 +63,16 @@ def plot_across_models(species, plot_list, in_dir,  name_list = [], location = '
 
 #Change legend labels here following simulation order:
     L=ax.legend()
-    # L.get_texts()[0].set_text('Relaxed SGO1 0x')
-    L.get_texts()[0].set_text('Relaxed SGO1 0.1x')
-    L.get_texts()[1].set_text('Relaxed SGO1 0.2x')
-    L.get_texts()[2].set_text('Relaxed SGO1 0.5x')
-    L.get_texts()[3].set_text('Relaxed SGO1 1x')
-    L.get_texts()[4].set_text('Relaxed SGO1 2x')
-    L.get_texts()[5].set_text('Relaxed SGO1 5x')
-    L.get_texts()[6].set_text('Relaxed SGO1 10x')
+    L.get_texts()[0].set_text(r'SGO1 KO')
+    L.get_texts()[1].set_text(r'SGO1 0.1x')
+    L.get_texts()[2].set_text(r'SGO1 0.2x')
+    L.get_texts()[3].set_text(r'SGO1 0.5x')
+    L.get_texts()[4].set_text(r'SGO1 1x')
+    L.get_texts()[5].set_text(r'SGO1 2x')
+    L.get_texts()[6].set_text(r'SGO1 5x')
+    L.get_texts()[7].set_text(r'SGO1 10x')
 
 
-    
     sns.move_legend(ax, "best", labelspacing = 0.01, fontsize='7')
     plt.setp(plt.gca().get_legend().get_texts())
     # plt.legend(labelspacing=0.01, fontsize='7')
@@ -85,16 +83,17 @@ def plot_across_models(species, plot_list, in_dir,  name_list = [], location = '
     plt.close()
 
 name_folder = "cata"
-in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026"
+in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026/deep_dive"
 
 plot_list = [
-            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_0.1x",
-            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_0.2x",
-            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_0.5x",
-            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_1x",
-            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_2x",
-            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_5x",
-            "06_01_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_kpp_10x"         
+            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_KO",
+            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scandown_0.1x",
+            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scandown_0.2x",
+            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scandown_0.5x",
+            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC",
+            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scanup_2x",
+            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scanup_5x",
+            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scanup_10x"
 
 
             ]
@@ -102,9 +101,9 @@ plot_list = [
 # toplotsp = ["CPC", "CPCa_total", "pNDC80_total"]
 
 # for x in toplotsp:
-plot_across_models("CPC", plot_list, in_dir_, location='ic',name_plot="06_01_26_relaxed_SGO1_kpp",active= 'all')
-plot_across_models("CPC", plot_list, in_dir_, location='kt',name_plot="06_01_26_relaxed_SGO1_kpp",active= 'all')
-plot_across_models("CPC", plot_list, in_dir_, location='bg',name_plot="06_01_26_relaxed_SGO1_kpp",active= 'all')
-plot_across_models("CPC", plot_list, in_dir_, location='ch',name_plot="06_01_26_relaxed_SGO1_kpp",active= 'all')
+plot_across_models("pNDC80_total", plot_list, in_dir_, location='ic',name_plot="06_04_26_relaxed_prebound_SGO1scan",active= 'all')
+plot_across_models("pNDC80_total", plot_list, in_dir_, location='kt',name_plot="06_04_26_relaxed_prebound_SGO1scan",active= 'all')
+plot_across_models("pNDC80_total", plot_list, in_dir_, location='bg',name_plot="06_04_26_relaxed_prebound_SGO1scan",active= 'all')
+plot_across_models("pNDC80_total", plot_list, in_dir_, location='ch',name_plot="06_04_26_relaxed_prebound_SGO1scan",active= 'all')
 
 

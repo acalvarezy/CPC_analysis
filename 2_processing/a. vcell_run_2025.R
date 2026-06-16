@@ -8,7 +8,7 @@ tic("total")
 # CHANGE: Folder paths
 funcPath<-"/Users/catalinaalvarez/Documents/GitHub/CPC_Analysis/functions"
 importPath<-"/Users/catalinaalvarez/Documents/CPC_data_2026"
-exportPath<-"/Users/catalinaalvarez/Documents/CPC_plots_2026"
+exportPath<-"/Users/catalinaalvarez/Documents/CPC_plots_2026/deep_dive"
 desktop<-"/Users/catalinaalvarez/Desktop"
 
 
@@ -42,12 +42,16 @@ bound_active_CPC <- c("bound_active_CPC")
 pNDC80_species <- c("pNDC80", "pNDC80_TTKi", "pNDC80_pTTKi", "pNDC80_TTKa", "pNDC80_pTTKa")
 pNDC80_total <- c("pNDC80_total")
 pH3S10rep <- c("pH3S10rep")
+pKNL1 <- c("pKNL1")
+HASPINi <- c("HASPINi")
+HASPINa <- c("HASPINa")
+pKNL1_all <- c("pKNL1", "pKNL1_bub1a")
 
 # ---------------- HEAT MAPS ---------------
 
 # How many heat maps to return
 # Change
-H <- 7
+H <- 6
 
 heatmap_species <- vector("list", H)
 heatmap_info_list <- vector("list", H)
@@ -59,7 +63,7 @@ heatmap_species[[3]] <- pH2A_species
 heatmap_species[[4]] <- SGO1_species
 heatmap_species[[5]] <- bound_CPC
 heatmap_species[[6]] <- bound_active_CPC
-heatmap_species[[7]] <- pH3S10rep
+# heatmap_species[[7]] <- pH3S10rep
 
 # Change, name of plot in plot directory, also name in heatmap, IN ORDER
 heatmap_info_list[[1]] <- c("all CPC")
@@ -68,15 +72,15 @@ heatmap_info_list[[3]] <- c("all pH2A")
 heatmap_info_list[[4]] <- c("all SGO1")
 heatmap_info_list[[5]] <- c("all bound CPC")
 heatmap_info_list[[6]] <- c("all bound active CPC")
-heatmap_info_list[[7]] <- c("all pH3S10rep")
+# heatmap_info_list[[7]] <- c("all pH3S10rep")
 
 
 # ---------------- LINE PLOTS ---------------
-L <- 12
- 
+L <- 16
+
 all_data <- vector("list", L)
 species_info_list <- vector("list", L)
-all_species <- c(CPC_species, CPCa_total, pH3_species, pH2A_species, HASPIN_PLK1_species, BUB1a_pKNL1_species, SGO1_species, bound_CPC, bound_active_CPC, pNDC80_species, pNDC80_total, pH3S10rep)
+all_species <- c(CPC_species, CPCa_total, pH3_species, pH2A_species, HASPIN_PLK1_species, BUB1a_pKNL1_species, SGO1_species, bound_CPC, bound_active_CPC, pNDC80_species, pNDC80_total, pH3S10rep, pKNL1, HASPINi, HASPINa, pKNL1_all)
 
 
 # Change, IN ORDER
@@ -92,10 +96,15 @@ all_data[[9]] <- bound_active_CPC
 all_data[[10]] <- pNDC80_species
 all_data[[11]] <- pNDC80_total
 all_data[[12]] <- pH3S10rep
- 
+all_data[[13]] <- pKNL1
+all_data[[14]] <- HASPINi
+all_data[[15]] <- HASPINa
+all_data[[16]] <- pKNL1_all
+
+
 # Change, IN ORDER
 #species_info_list[[1]] <- c("File name for saving plot", "Title on plots with only inactive species", "Title on plots with only active species", "Title on plots with both active and inactive species",
-                            # SUM:"sums of inactive and active species should be added" (Active: Black, Solid & Inactive: Black, Dashed), 
+                            # SUM:"sums of inactive and active species should be added" (Active: Black, Solid & Inactive: Black, Dashed),
                             # TOTAL: "sum of all species should be added",
                             # FULL: "all species should be added to line plots",
                             # COLLAPSIBLE: "whether only the top 4 species and their sums/total should be specified")
@@ -111,6 +120,11 @@ species_info_list[[9]] <- c("bound_active_CPC", "Inactive Species", "Active Spec
 species_info_list[[10]] <- c("pNDC80_species", "Inactive Species", "Active Species", "pNDC80 Species", FALSE, FALSE, TRUE, FALSE)
 species_info_list[[11]] <- c("pNDC80_total", "Inactive Species", "Active Species", "SUM of pNDC80 Species", FALSE, FALSE, TRUE, FALSE)
 species_info_list[[12]] <- c("pH3S10rep", "Inactive Species", "Active Species", "pH3S10 reporter", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[13]] <- c("pKNL1", "Inactive Species", "Active Species", "pKNL1", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[14]] <- c("HASPINi", "Inactive Species", "Active Species", "HASPINi", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[15]] <- c("HASPINa", "Inactive Species", "Active Species", "HASPINa", FALSE, FALSE, TRUE, FALSE)
+species_info_list[[16]] <- c("pKNL1_all", "Inactive Species", "Active Species", "pKNL1_all", FALSE, FALSE, TRUE, FALSE)
+
 
 # ---------------- SIMULATION SPECIFICS ---------------
 
@@ -119,17 +133,13 @@ species_info_list[[12]] <- c("pH3S10rep", "Inactive Species", "Active Species", 
 kt_width = c(
    # "Telocentric_Relaxed",
     # "Metacentric_Relaxed",
-    "Metacentric_Relaxed",
-    "Metacentric_Relaxed",
-    "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
+    # "Metacentric_Relaxed",
     "Metacentric_Relaxed",
     "Metacentric_Relaxed",
     "Metacentric_Relaxed"
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed"
-    # "Metacentric_Tensed",
-    # "Metacentric_Tensed",
+    # "Metacentric_Tensed"
     # "Metacentric_Tensed"
   # "Telocentric_Relaxed"
   # "Telocentric_Tensed"
@@ -141,24 +151,18 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  "SimID_314795442_0__exported",
-  "SimID_314788124_1__exported",
-  "SimID_314788124_2__exported",
-  "SimID_314795442_1__exported",
-  "SimID_314788124_4__exported",
-  "SimID_314788124_5__exported"
-  
+  "SimID_316428962_4__exported",
+  "SimID_316428962_5__exported",
+  "SimID_316428962_6__exported"
+
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_0.1x_acH2A75P",
-  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_0.2x_acH2A75P",
-  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_0.5x_acH2A75P",
-  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_2x_acH2A75P",
-  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_5x_acH2A75P",
-  "05_30_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_10x_acH2A75P"
+  "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_2x",
+  "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_5x",
+  "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_10x"
   
 )
 #########################################################
@@ -185,11 +189,12 @@ for(i in 1:length(sims)){
                all_species,
                species_info_list,
                tInit=0,
-               tSpan=500, 
-               desiredInterval=100,
+               tSpan=100, 
+               desiredInterval=1,
+               nHeatmaps = 7,
                # alternative_range <- NULL, #when equal spacing is enough on heatmaps
-               alternative_range <- c(0, 1, 3, 5, 10, 20), #alternative desired time points to be plotted on heatmaps
-               cutoff=list("CPC"=12), #for heatmap color bar
+               alternative_range <- c(0, 10, 20, 25, 30, 40, 50), #alternative desired time points to be plotted on heatmaps
+               cutoff=list("CPC"=11), #for heatmap color bar
                funcPath,
                importPath,
                exportPath_new,

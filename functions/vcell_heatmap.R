@@ -7,6 +7,7 @@ vcell_heatmap <- function(
     tInit=0, # in s
     tSpan, # in s
     tInterval, # in s, what set in VCell
+    nHeatmaps,
     desiredInterval, # in s, what you want the data to be spaced by
     alternative_range, #the desired time points to be plotted
     xdiv=3, # number of divisions desired on x axis of output plot
@@ -36,7 +37,8 @@ vcell_heatmap <- function(
   
   # initialize variables
   n_SimID<-length(SimID)
-  n_t<-(tSpan-tInit)/desiredInterval+1
+  n_t<- nHeatmaps
+  # n_t<-(tSpan-tInit)/desiredInterval+1
   
   if (is.null(alternative_range)) {
     trange<-seq(from=tInit/tInterval,to=tSpan/tInterval,length.out=n_t)
@@ -154,8 +156,8 @@ vcell_heatmap <- function(
   if (is.null(alternative_range)) {
     t_short<-seq(from=tInit,to=tSpan,length.out=n_t)
     }else {
-    t_short = alternative_range*10}
-  t_equal_str<-"t (s) ="
+    t_short = (alternative_range/2)*(24/60)}
+  t_equal_str<-"t (m) ="
   
   t_labs[1] <- paste(t_equal_str,t_short[1])
   t_labs[2:length(t_short)]<-t_short[2:length(t_short)]

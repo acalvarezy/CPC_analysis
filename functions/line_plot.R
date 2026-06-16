@@ -143,10 +143,10 @@ line_plot <- function(
   
   # Initialize empty vectors for each species
   for (i in 1:length(all_species)) {
-    kt_species[[i]] <- vector("numeric", ((tSpan/10) + 1))
-    ic_species[[i]] <- vector("numeric", ((tSpan/10) + 1))
-    bg_species[[i]] <- vector("numeric", ((tSpan/10) + 1))
-    ch_species[[i]] <- vector("numeric", ((tSpan/10) + 1))
+    kt_species[[i]] <- vector("numeric", ((tSpan) + 1))
+    ic_species[[i]] <- vector("numeric", ((tSpan) + 1))
+    bg_species[[i]] <- vector("numeric", ((tSpan) + 1))
+    ch_species[[i]] <- vector("numeric", ((tSpan) + 1))
   }
   
    
@@ -164,7 +164,7 @@ line_plot <- function(
 
   
   # data processing
-  for(z in 0:(tSpan/10)){
+  for(z in 0:(tSpan)){
     
     t <- z
     
@@ -258,26 +258,26 @@ line_plot <- function(
   }
   
   data_ic <- data.frame(
-    Time = 0:(tSpan/10),
-    Species = rep(species, each = ((tSpan/10) + 1)),
+    Time = 0:(tSpan),
+    Species = rep(species, each = ((tSpan) + 1)),
     IC = unlist(ic_species[(pointer + 1):(pointer + length(species))])
   )
   
   data_kt <- data.frame(
-    Time = 0:(tSpan/10),
-    Species = rep(species, each = ((tSpan/10) + 1)),
+    Time = 0:(tSpan),
+    Species = rep(species, each = ((tSpan) + 1)),
     KT = unlist(kt_species[(pointer + 1):(pointer + length(species))])
   )
   
   data_bg <- data.frame(
-    Time = 0:(tSpan/10),
-    Species = rep(species, each = ((tSpan/10) + 1)),
+    Time = 0:(tSpan),
+    Species = rep(species, each = ((tSpan) + 1)),
     BG = unlist(bg_species[(pointer + 1):(pointer + length(species))])
   )
   
   data_ch <- data.frame(
-    Time = 0:(tSpan/10),
-    Species = rep(species, each = ((tSpan/10) + 1)),
+    Time = 0:(tSpan),
+    Species = rep(species, each = ((tSpan) + 1)),
     CH = unlist(ch_species[(pointer + 1):(pointer + length(species))])
   )
   
@@ -440,7 +440,7 @@ line_plot <- function(
       geom_line(data = active_ic_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesActive, "concentration at inner centromere")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+ #10 was 100
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -459,7 +459,7 @@ line_plot <- function(
       geom_line(data = inactive_ic_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesInactive, "concentration at inner centromere")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -477,7 +477,7 @@ line_plot <- function(
       geom_line(data = active_kt_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesActive, "concentration at kinetochore")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -495,7 +495,7 @@ line_plot <- function(
       geom_line(data = inactive_kt_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesInactive, "concentration at kinetochore")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -523,7 +523,7 @@ line_plot <- function(
       geom_line(data = ic_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesFull, "at inner centromere")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -549,7 +549,7 @@ line_plot <- function(
       geom_line(data = kt_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesFull, "at kinetochore")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -615,7 +615,7 @@ line_plot <- function(
       geom_line(data = highlight_active_ic_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesActive, "concentration at inner centromere")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -674,7 +674,7 @@ line_plot <- function(
       geom_line(data = highlight_inactive_ic_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesActive, "concentration at inner centromere")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -732,7 +732,7 @@ line_plot <- function(
       geom_line(data = highlight_active_kt_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesActive, "concentration at inner centromere")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -791,7 +791,7 @@ line_plot <- function(
       geom_line(data = highlight_inactive_kt_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesActive, "concentration at inner centromere")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -850,7 +850,7 @@ line_plot <- function(
       geom_line(data = highlight_ic_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesFull, "at inner centromere")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -908,7 +908,7 @@ line_plot <- function(
       geom_line(data = highlight_kt_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesFull, "at kinetochore")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -939,7 +939,7 @@ line_plot <- function(
       geom_line(data = ic_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesFull, "at inner centromere")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
@@ -963,7 +963,7 @@ line_plot <- function(
       geom_line(data = kt_long, aes(x = Time, y = Concentration, color = Species, linetype = Species), linewidth = linewidth) +
       labs(x = "Time (s)", y = TeX("Concentration ($\\mu$M)")) +
       ggtitle(paste(speciesFull, "at kinetochore")) +
-      scale_x_continuous(breaks = seq(0, (tSpan/10), 10), labels = seq(0, tSpan, 100))+
+      scale_x_continuous(breaks = seq(0, (tSpan), 10), labels = seq(0, tSpan, 10))+
       scale_color_manual(values = setNames(species_plot_data$Color, species_plot_data$Species)) +
       scale_linetype_manual(values = setNames(species_plot_data$Linetype, species_plot_data$Species)) +
       theme(panel.background = element_rect(fill = "transparent"),
