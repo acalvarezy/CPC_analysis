@@ -32,7 +32,7 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
             for z in location:
                     if z in ['kt', 'ic']:
                         tmp1 = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
-                        tmp1['Time'] = 10*tmp1['Time']
+                        tmp1['Time'] = tmp1['Time']
                         tmp1['parameter'] = n
                         tmp1['all'] = tmp1[list(set(tmp1.columns).difference({"Time",'parameter'}))].sum(axis = 1)
                                      
@@ -54,16 +54,16 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
         print(df)
         df.to_excel(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DCPC/{name_plot}_{location[0]}_at_{timepoint}s.xlsx")
 
-        fig = plt.figure(figsize = (5,4.5))
+        fig = plt.figure(figsize = (6,4.5))
         sns.lineplot(data=df, x="percentage", y="DCPC", hue="state", marker="o", markersize=3, palette="magma", linewidth=3)
         plt.ylabel(fr'Total CPC ($\mu$M)', fontsize=12)
-        plt.xlabel("SGO1 abundance (%)", fontsize=12)
+        plt.xlabel("SGO1 concentration (%)", fontsize=12)
         plt.legend(title="Chromosome state")
         # plt.gca().invert_yaxis()
         if location[0] == "ic":
-            plt.title(fr"$\Delta CPC$ at inner centromere ({timepoint} s)")
+            plt.title(fr"$\Delta CPC$ at inner centromere ({timepoint*24/(2*60)} )")
         else: 
-            plt.title(fr"$\Delta CPC$ at kinetochores ({timepoint} s)")    
+            plt.title(fr"$\Delta CPC$ at kinetochores ({timepoint*24/(2*60)} m)")    
         plt.savefig(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DCPC/{name_plot}_{location[0]}_at_{timepoint}s.pdf")
 
 
@@ -74,14 +74,17 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
 name_folder = "folder"
 in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026/deep_dive"
 plot_list = [
-            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_KO",
-            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scandown_0.1x",
-            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scandown_0.2x",
-            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scandown_0.5x",
-            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC",
-            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scanup_2x",
-            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scanup_5x",
-            "06_04_26_metacentric_relaxed_MCF10A_chr19_PMP1_preboundSGO1_CPC_SGO1_scanup_10x"
+            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_KO",
+            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_0.1x",
+            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_0.2x",
+            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_0.5x",
+            "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1",
+            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_2x",
+            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_5x",
+            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_10x"
+
+
+    
 
         ]
             
@@ -101,13 +104,13 @@ haplotype = [
 
 inhibition = [
             0,
-            10,
-            20,
-            50,
-            100,
+            0.1,
+            0.2,
+            0.5,
+            1,
             200,
             500,
-            1000,  
+            1000
               
               ]
                                         
@@ -116,5 +119,5 @@ location = ["ic", #change region of interest
             "bg"
                 ]
 
-plot_across_models('CPC', plot_list, in_dir_, location, 200 ,name_plot="06_08_26_metacentric_MCF10A_chr19_PMP1_drugresponse_SGO1",active= 'all')
+plot_across_models('CPC', plot_list, in_dir_, location, 25 ,name_plot="06_16_26_drugresponse_SGO1",active= 'all')
 

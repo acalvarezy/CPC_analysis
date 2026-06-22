@@ -51,7 +51,7 @@ pKNL1_all <- c("pKNL1", "pKNL1_bub1a")
 
 # How many heat maps to return
 # Change
-H <- 6
+H <- 7
 
 heatmap_species <- vector("list", H)
 heatmap_info_list <- vector("list", H)
@@ -63,7 +63,7 @@ heatmap_species[[3]] <- pH2A_species
 heatmap_species[[4]] <- SGO1_species
 heatmap_species[[5]] <- bound_CPC
 heatmap_species[[6]] <- bound_active_CPC
-# heatmap_species[[7]] <- pH3S10rep
+heatmap_species[[7]] <- pH3S10rep
 
 # Change, name of plot in plot directory, also name in heatmap, IN ORDER
 heatmap_info_list[[1]] <- c("all CPC")
@@ -72,7 +72,7 @@ heatmap_info_list[[3]] <- c("all pH2A")
 heatmap_info_list[[4]] <- c("all SGO1")
 heatmap_info_list[[5]] <- c("all bound CPC")
 heatmap_info_list[[6]] <- c("all bound active CPC")
-# heatmap_info_list[[7]] <- c("all pH3S10rep")
+heatmap_info_list[[7]] <- c("all pH3S10rep")
 
 
 # ---------------- LINE PLOTS ---------------
@@ -134,10 +134,6 @@ kt_width = c(
    # "Telocentric_Relaxed",
     # "Metacentric_Relaxed",
     # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    "Metacentric_Relaxed",
-    "Metacentric_Relaxed",
     "Metacentric_Relaxed"
     # "Metacentric_Tensed"
     # "Metacentric_Tensed"
@@ -151,18 +147,14 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  "SimID_316428962_4__exported",
-  "SimID_316428962_5__exported",
-  "SimID_316428962_6__exported"
+  "SimID_316230588_0__exported"
 
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_2x",
-  "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_5x",
-  "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_10x"
+  "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1_cum"
   
 )
 #########################################################
@@ -193,6 +185,7 @@ for(i in 1:length(sims)){
                desiredInterval=1,
                nHeatmaps = 7,
                # alternative_range <- NULL, #when equal spacing is enough on heatmaps
+               # alternative_range <- c(0, 10, 25, 40, 60, 75, 100), #alternative desired time points to be plotted on heatmaps
                alternative_range <- c(0, 10, 20, 25, 30, 40, 50), #alternative desired time points to be plotted on heatmaps
                cutoff=list("CPC"=11), #for heatmap color bar
                funcPath,
@@ -209,16 +202,16 @@ for(i in 1:length(sims)){
 
   }
 
-  # cpc_data <- get_cumulative_bound_CPC(
-  # SimID         = sims[i],
-  # tInit         = 0,
-  # tSpan         = 500,
-  # importPath    = importPath,
-  # exportPath    = exportPath_new,
-  # dataDim       = dataDim,
-  # chromWidth    = chromWidth,
-  # chromHeight   = chromHeight,
-  # kt_width      = kt_width[i]
-  # )
+  cpc_data <- get_cumulative_bound_CPC(
+  SimID         = sims[i],
+  tInit         = 0,
+  tSpan         = 25,
+  importPath    = importPath,
+  exportPath    = exportPath_new,
+  dataDim       = dataDim,
+  chromWidth    = chromWidth,
+  chromHeight   = chromHeight,
+  kt_width      = kt_width[i]
+  )
 }
 

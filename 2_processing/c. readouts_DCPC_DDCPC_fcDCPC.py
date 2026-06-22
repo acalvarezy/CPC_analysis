@@ -31,7 +31,7 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
             for z in location:
                     if z in ['kt', 'ic']:
                         tmp1 = pd.read_csv(f"{in_dir}/{p}/data/data_{z}_{species}.csv", header = 0, index_col = None)
-                        tmp1['Time'] = 10*tmp1['Time']
+                        tmp1['Time'] = 2*tmp1['Time']
                         tmp1['parameter'] = n
                         tmp1['all'] = tmp1[list(set(tmp1.columns).difference({"Time",'parameter'}))].sum(axis = 1)
                                      
@@ -127,53 +127,14 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
 name_folder = "folder"
 in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026"
 plot_list = [
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_0P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_0P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_5P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_5P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_10P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_10P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_15P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_15P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_20P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_20P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_25P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_25P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_30P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_30P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_35P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_35P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_40P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_40P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_45P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_45P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_50P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_50P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_55P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_55P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_60P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_60P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_65P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_65P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_70P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_70P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_75P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_75P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_80P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_80P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_85P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_85P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_90P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_90P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_95P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_95P",
-            "05_20_26_metacentric_relaxed_MCF10A_chr19_PMP1_acH2A_arms_100P",
-            "05_20_26_metacentric_tensed_MCF10A_chr19_PMP1_acH2A_arms_100P"
+            "06_13_26_metacentric_transition_tensed_MCF10A_chr19_PMP1_t_0",
+            "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1",
+            "06_14_26_metacentric_relaxed_MCF10A_chr19_PMP1_noacetylation"
                                             ]
 
 location = ["ic", #change region of interest
             "bg"
                 ]
 
-plot_across_models('CPC', plot_list, in_dir_, location, 200 ,name_plot="05_20_26_metacentric_MCF10A_chr19_PMP1",active= 'all')
+plot_across_models('CPC', plot_list, in_dir_, location, 25 ,name_plot="05_20_26_metacentric_MCF10A_relaxed_tensed_noacH2A",active= 'all')
 

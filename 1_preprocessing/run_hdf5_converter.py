@@ -14,11 +14,11 @@ models = np.array([
 
 
 simulations = np.array([
-	"06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1_HASPINInh_50P"
+	"06_14_26_metacentric_relaxed_MCF10A_chr19_PMP1_noacetylation"
         ])
  
 simID = np.array([ 
-	"SimID_316428868_0__exported"
+	"SimID_317052736_0__exported"
         ])
 
 for i in range(len(models)):

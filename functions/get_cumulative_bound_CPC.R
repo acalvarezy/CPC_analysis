@@ -50,8 +50,8 @@ get_cumulative_bound_CPC <- function(
   cat(sprintf("Inner centromere region: rows %d:%d, cols %d:%d\n", y1, y2, x3, x4))
   
   # ── 3. Loop over timepoints ──────────────────────────────────────────────────
-  timepoints  <- seq(tInit / 10, tSpan / 10)   # integer indices used in filenames
-  times_sec   <- timepoints * 10                # actual time in seconds
+  timepoints  <- seq(tInit, tSpan)   # integer indices used in filenames
+  times_min   <- timepoints*0.5 * 24/60                # actual time in minutes
   n_tp        <- length(timepoints)
   
   cumsum_vec  <- numeric(n_tp)   # cumulative sum (total molecules in region)
@@ -100,7 +100,7 @@ get_cumulative_bound_CPC <- function(
   # ── 4. Build results table ───────────────────────────────────────────────────
   results_df <- data.frame(
     Time_index        = timepoints,
-    Time_s            = times_sec,
+    Time_m            = times_min,
     CumulativeSum_IC  = cumsum_vec,
     MeanConc_IC       = mean_vec
   )
@@ -112,7 +112,7 @@ get_cumulative_bound_CPC <- function(
   cat(sprintf("Table saved to: %s\n", csv_path))
   
   # ── 6. Barplot: cumulative sum vs time ───────────────────────────────────────
-  p_cumsum <- ggplot(results_df, aes(x = Time_s, y = CumulativeSum_IC)) +
+  p_cumsum <- ggplot(results_df, aes(x = Time_m, y = CumulativeSum_IC)) +
     geom_bar(stat = "identity", fill = "#377eb8", color = NA, width = 8) +
     labs(
       title    = "Cumulative bound CPC at inner centromere over time",

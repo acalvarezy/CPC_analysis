@@ -5,11 +5,11 @@ lapply(packages, require, character.only = TRUE)
 importPath<-"/Users/catalinaalvarez/Documents/CPC_plots_2026"
 
 var <- c(
-  "03_31_26_metacentric_relaxed_MCF10A_chr19_PMP1_kpps=0.1s",
-  "03_31_26_metacentric_tensed_MCF10A_chr19_PMP1_kpps=0.1s"
+  "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1",
+  "06_13_26_metacentric_transition_tensed_MCF10A_chr19_PMP1_t_0"
 )
 
-timepoint = 40
+timepoint = 25
 timepoint = timepoint+1
 
 df <- data.frame(

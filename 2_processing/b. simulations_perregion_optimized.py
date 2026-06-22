@@ -97,10 +97,10 @@ def plot_across_models(
     else:
         if species == "CPCa_total":
             ax.set_xlim(0, 20)
-            ax.set_ylim(0, 25)
+            ax.set_ylim(0, 16)
             plt.xlabel("Time (s)")
         else: 
-            ax.set_xlim(0, 20)
+            ax.set_xlim(0, 10)
             ax.set_ylim(0, 25)
             plt.xlabel("Time (m)")
 
@@ -135,24 +135,19 @@ in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026/deep_dive"
 
 plot_list = [
     "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1",
-    "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1_TTKInh_50P",
-    "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1_TTKInh_70P",
-    "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1_TTKInh_90P",
-    "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1_TTKInh_97P",
-    "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1_TTKInh_99P",
-    "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1_TTKInh_100"
+    "06_13_26_metacentric_transition_tensed_MCF10A_chr19_PMP1_t_0",
+    "06_14_26_metacentric_relaxed_MCF10A_chr19_PMP1_noacetylation"
 
+    
 
 ]
 
 clean_names = [
-    r"Ref. relaxed state",
-    r"TTK 50% inhibition",
-    r"TTK 70% inhibition",
-    r"TTK 90% inhibition",
-    r"TTK 97% inhibition",
-    r"TTK 99% inhibition",
-    r"TTK 100% inhibition"
+    r"Relaxed state",
+    r"Tensed state",
+    r"No acetylation"
+
+    
     # # r"SGO1 50%",
     # fr"SGO1 25% + 50% PLK1 inh",
     # fr"SGO1 25% + 70% PLK1 inh",
@@ -183,12 +178,12 @@ sgo1_palette = {
 locations = ["ic", "kt", "bg", "ch"]
 for loc in locations:
     plot_across_models(
-        species="pNDC80_total",
+        species="CPC",
         plot_list=plot_list,
         in_dir=in_dir_,
         name_list=clean_names,
         location=loc,
-        name_plot="06_15_26_acH2A_TKKInh",
+        name_plot="06_21_26_relaxed_tensed_noacH2A",
         active="all",
         name_folder=name_folder,
         custom_palette="magma",  # Injected custom palette
