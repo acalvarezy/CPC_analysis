@@ -130,7 +130,7 @@ get_cumulative_bound_CPC <- function(
     )
   
   # ── 7. Barplot: mean concentration vs time ───────────────────────────────────
-  p_mean <- ggplot(results_df, aes(x = Time_s, y = MeanConc_IC)) +
+  p_mean <- ggplot(results_df, aes(x = Time_m, y = MeanConc_IC)) +
     geom_bar(stat = "identity", fill = "#e41a1c", color = NA, width = 8) +
     labs(
       title    = "Mean bound CPC concentration at inner centromere over time",

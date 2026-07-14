@@ -9,16 +9,16 @@ os.chdir(new_directory_path)
 
 #Update the simulation data
 models = np.array([
-    "006_13_26 CPC_metacentric_relaxed_MCF10A_chr19_PMP1_fortransition"
+   "07_01_26_acrocentric_tensed_MCF10A_chr19_PMP1"
 	])
 
 
 simulations = np.array([
-	"06_14_26_metacentric_relaxed_MCF10A_chr19_PMP1_noacetylation"
+	"07_01_26_acrocentric_tensed_MCF10A_chr19_PMP1"
         ])
  
 simID = np.array([ 
-	"SimID_317052736_0__exported"
+	"SimID_318090108_0__exported"
         ])
 
 for i in range(len(models)):

@@ -80,17 +80,12 @@ plot_list = [
             "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_0.5x",
             "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1",
             "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_2x",
-            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_5x",
-            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_10x"
-
-
-    
+            "06_15_26_metacentric_relaxed_MCF10A_chr19_PMP1_SGO1_scan_5x"
 
         ]
             
 
 haplotype = [
-          "Relaxed",
           "Relaxed",
           "Relaxed",
           "Relaxed",
@@ -109,8 +104,7 @@ inhibition = [
             0.5,
             1,
             200,
-            500,
-            1000
+            500
               
               ]
                                         
@@ -119,5 +113,5 @@ location = ["ic", #change region of interest
             "bg"
                 ]
 
-plot_across_models('CPC', plot_list, in_dir_, location, 25 ,name_plot="06_16_26_drugresponse_SGO1",active= 'all')
+plot_across_models('CPC', plot_list, in_dir_, location, 25 ,name_plot="06_26_26_drugresponse_SGO1",active= 'all')
 

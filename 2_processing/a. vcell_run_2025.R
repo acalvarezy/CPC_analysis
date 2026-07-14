@@ -51,7 +51,7 @@ pKNL1_all <- c("pKNL1", "pKNL1_bub1a")
 
 # How many heat maps to return
 # Change
-H <- 7
+H <- 6
 
 heatmap_species <- vector("list", H)
 heatmap_info_list <- vector("list", H)
@@ -63,7 +63,7 @@ heatmap_species[[3]] <- pH2A_species
 heatmap_species[[4]] <- SGO1_species
 heatmap_species[[5]] <- bound_CPC
 heatmap_species[[6]] <- bound_active_CPC
-heatmap_species[[7]] <- pH3S10rep
+# heatmap_species[[7]] <- pH3S10rep
 
 # Change, name of plot in plot directory, also name in heatmap, IN ORDER
 heatmap_info_list[[1]] <- c("all CPC")
@@ -72,7 +72,7 @@ heatmap_info_list[[3]] <- c("all pH2A")
 heatmap_info_list[[4]] <- c("all SGO1")
 heatmap_info_list[[5]] <- c("all bound CPC")
 heatmap_info_list[[6]] <- c("all bound active CPC")
-heatmap_info_list[[7]] <- c("all pH3S10rep")
+# heatmap_info_list[[7]] <- c("all pH3S10rep")
 
 
 # ---------------- LINE PLOTS ---------------
@@ -131,11 +131,10 @@ species_info_list[[16]] <- c("pKNL1_all", "Inactive Species", "Active Species", 
 # Model type, goes on the left of the heatmap
 # Change
 kt_width = c(
-   # "Telocentric_Relaxed",
+   # "Telocentric_Relaxed"
     # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed",
-    "Metacentric_Relaxed"
-    # "Metacentric_Tensed"
+    # "Metacentric_Relaxed"
+    "Metacentric_Tensed"
     # "Metacentric_Tensed"
   # "Telocentric_Relaxed"
   # "Telocentric_Tensed"
@@ -147,32 +146,31 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  "SimID_316230588_0__exported"
+  "test/SimID_318090108_0__exported"
 
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1_cum"
+  "rivanna_test"
   
 )
 #########################################################
 
-
 for(i in 1:length(sims)){
   if(file.exists(importPath) == TRUE){
-    
-    
+
+
     sweep_name<-var[i]
-    
+
     print(sweep_name)
-    
+
 
     dir.create(file.path(exportPath, sweep_name))
     exportPath_new <- paste(exportPath, sweep_name, sep="/")
 
-    
+
     save_plots(sims[i],
                paste(kt_width[i], "Model"),
                heatmap_species,
@@ -181,19 +179,19 @@ for(i in 1:length(sims)){
                all_species,
                species_info_list,
                tInit=0,
-               tSpan=100, 
+               tSpan=100,
                desiredInterval=1,
                nHeatmaps = 7,
                # alternative_range <- NULL, #when equal spacing is enough on heatmaps
-               # alternative_range <- c(0, 10, 25, 40, 60, 75, 100), #alternative desired time points to be plotted on heatmaps
                alternative_range <- c(0, 10, 20, 25, 30, 40, 50), #alternative desired time points to be plotted on heatmaps
+               # alternative_range <- c(0, 20, 30, 50, 70, 90, 100), #alternative desired time points to be plotted on heatmaps
                cutoff=list("CPC"=11), #for heatmap color bar
                funcPath,
                importPath,
                exportPath_new,
                kt_width[i],
                movie = FALSE,
-               lineplots=TRUE,
+               lineplots=FALSE,
                KK_dist_relaxed = 0.575,
                KK_dist_tensed = 1.15,
                KT_width= 0.075,
@@ -202,16 +200,16 @@ for(i in 1:length(sims)){
 
   }
 
-  cpc_data <- get_cumulative_bound_CPC(
-  SimID         = sims[i],
-  tInit         = 0,
-  tSpan         = 25,
-  importPath    = importPath,
-  exportPath    = exportPath_new,
-  dataDim       = dataDim,
-  chromWidth    = chromWidth,
-  chromHeight   = chromHeight,
-  kt_width      = kt_width[i]
-  )
+  # cpc_data <- get_cumulative_bound_CPC(
+  # SimID         = sims[i],
+  # tInit         = 0,
+  # tSpan         = 25,
+  # importPath    = importPath,
+  # exportPath    = exportPath_new,
+  # dataDim       = dataDim,
+  # chromWidth    = chromWidth,
+  # chromHeight   = chromHeight,
+  # kt_width      = kt_width[i]
+  # )
 }
 
