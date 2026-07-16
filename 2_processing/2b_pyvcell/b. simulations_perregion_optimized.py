@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
+
 def plot_across_models(
     species,
     plot_list,
@@ -59,6 +60,13 @@ def plot_across_models(
     if plot_data.empty:
         print(f"No data found for {location.upper()} - skipping plot.")
         return
+    
+    #Data processing for parameters analysis
+    sub = plot_data[plot_data['Time'] == 5.0][['parameter', 'all']].rename(
+    columns={'parameter': 'model', 'all': 'cpc_ic'})
+    sub = sub.reset_index(drop=True)
+    
+    sub.to_excel(f"{out_dir}/{name_plot}-{species}_loc-{location}.xlsx", index=False)
 
     fig, ax = plt.subplots(figsize=(7, 5), constrained_layout=True)
 
