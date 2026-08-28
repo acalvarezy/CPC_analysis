@@ -1,0 +1,61 @@
+PYVCELL:
+1. Create the pyvcell virtual environment and install vcell: 
+    python --version
+    python3.13 -m venv venv_pyvcell_acay
+    source venv_pyvcell_acay/bin/activate
+    pip install pyvcell zarr matplotlib colorama h5py orjson pyvista pandas pyvcell_fvsolver libvcell
+
+2.  Run pyvcell   
+    cd /Users/catalinaalvarez/Documents/GitHub/VCell_Analysis/3c_run_pyvcell
+    source venv_pyvcell_acay/bin/activate 
+    python make_transition_tensed.py
+
+4. RIVANNA access:
+    ssh -Y aca9pw@login.hpc.virginia.edu
+
+------------------------------------------------------------------------
+5_vcell_to_ch --> read tutorials
+    conda activate snakemake
+
+    1. Normalize (normalize_CPC.py)
+
+	a) Change outdir and in_dir: Input: Folder with exported data folder (Ex: SimID_316230588_0__exported)
+	b) Change min_mixes and rescaling_factors accordingly
+	c) In terminal: 
+			cd Documents/GitHub/VCell_Analysis/5_vcell_to_ch/
+			python normalize_CPC.py
+
+
+    2. Generate_plot_pdf --> Equivalent to run Matlab code (run_spinodal_decomp.m) but with additional plots
+	
+	a) Edit Snakefile doc with FOLDER NAME and SIM_SET	
+
+	cd /Users/catalinaalvarez/Documents/GitHub/VCell_Analysis/5_vcell_to_ch/generate_plot_pdf
+	snakemake -n --> check what jobs to do
+   	snakemake -p -c 2 --> run the jobs
+    	conda deactivate
+
+ 	b) Find results at: summary_output folder and edit "trend" column in. summary.csv files 
+
+
+    3. spinodal_point_plot --> Generate final maps for spinodal points comparisons
+S
+	a) Edit spinodal_contour.py file with the information of your simulation. This steps is done individually per model
+
+		cd /Users/catalinaalvarez/Documents/GitHub/VCell_Analysis/5_vcell_to_ch/spinodal_point_plot
+		python spinodal_contour.py
+
+	   Find results at: spinodal_point_plot folder
+
+
+	b) Edit spinodal_contour_filled.py file with the simulations you want to compare (sims)(Ex. Tensed-Relaxed).
+
+		cd /Users/catalinaalvarez/Documents/GitHub/VCell_Analysis/5_vcell_to_ch/spinodal_point_plot
+		python spinodal_contour_filled.py
+
+__________________________________________________________________________
+last version for plotting: vcell_run_2026
+
+
+
+

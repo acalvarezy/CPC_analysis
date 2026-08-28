@@ -100,6 +100,8 @@ def convert_hdf5_to_csv(
             "bound_CPC",
             "bound_active_CPC",
 	        "pH3S10rep",
+            "SGO1_CPCa_pH3", "pH2A_SGO1_CPCa_pH3", "SGO1_CPCi_pH3", "pH2A_SGO1_CPCi_pH3"
+
         ]
         print(f"Using default species list of length {len(default_species)}")
     else:

@@ -8,7 +8,7 @@ tic("total")
 # CHANGE: Folder paths
 funcPath<-"/Users/catalinaalvarez/Documents/GitHub/CPC_Analysis/functions"
 importPath<-"/Users/catalinaalvarez/Documents/CPC_data_2026"
-exportPath<-"/Users/catalinaalvarez/Documents/CPC_plots_2026/deep_dive"
+exportPath<-"/Users/catalinaalvarez/Documents/CPC_plots_2026/paper_draft_figures"
 desktop<-"/Users/catalinaalvarez/Desktop"
 
 
@@ -31,12 +31,16 @@ chromHeight=3.4 #um
 # Species Lists, add any that are required to be on one plot
 
 CPC_species <-c("CPCa", "pH2A_SGO1_CPCa", "H3_CPCa", "pH3_CPCa", "SGO1_CPCa", "CPCi", "pH2A_SGO1_CPCi", "H3_CPCi", "pH3_CPCi", "SGO1_CPCi")
+# CPC_species <-c("CPCa", "pH2A_SGO1_CPCa", "H3_CPCa", "pH3_CPCa", "SGO1_CPCa", "CPCi", "pH2A_SGO1_CPCi", "H3_CPCi", "pH3_CPCi", "SGO1_CPCi", "SGO1_CPCa_pH3", "pH2A_SGO1_CPCa_pH3", "SGO1_CPCi_pH3", "pH2A_SGO1_CPCi_pH3")
 CPCa_total <-c("CPCa_total")
 pH3_species <- c("pH3", "pH3_CPCa", "pH3_CPCi")
+# pH3_species <- c("pH3", "pH3_CPCa", "pH3_CPCi", "SGO1_CPCa_pH3", "pH2A_SGO1_CPCa_pH3", "SGO1_CPCi_pH3", "pH2A_SGO1_CPCi_pH3")
 pH2A_species <- c("pH2A", "pH2A_SGO1", "pH2A_SGO1_CPCa", "pH2A_SGO1_CPCi")
+# pH2A_species <- c("pH2A", "pH2A_SGO1", "pH2A_SGO1_CPCa", "pH2A_SGO1_CPCi", "pH2A_SGO1_CPCa_pH3", "pH2A_SGO1_CPCi_pH3")
 HASPIN_PLK1_species <- c("HASPINa", "HASPINi", "PLK1a", "PLK1i")
 BUB1a_pKNL1_species <- c("BUB1a",  "pKNL1", "pKNL1_bub1a", "BUB1a_pknl1")
 SGO1_species <- c("SGO1", "pH2A_SGO1", "pH2A_SGO1_CPCi", "pH2A_SGO1_CPCa", "SGO1_CPCi", "SGO1_CPCa")
+# SGO1_species <- c("SGO1", "pH2A_SGO1", "pH2A_SGO1_CPCi", "pH2A_SGO1_CPCa", "SGO1_CPCi", "SGO1_CPCa", "SGO1_CPCa_pH3", "pH2A_SGO1_CPCa_pH3", "SGO1_CPCi_pH3", "pH2A_SGO1_CPCi_pH3")
 bound_CPC <- c("bound_CPC")
 bound_active_CPC <- c("bound_active_CPC")
 pNDC80_species <- c("pNDC80", "pNDC80_TTKi", "pNDC80_pTTKi", "pNDC80_TTKa", "pNDC80_pTTKa")
@@ -132,9 +136,14 @@ species_info_list[[16]] <- c("pKNL1_all", "Inactive Species", "Active Species", 
 # Change
 kt_width = c(
    # "Telocentric_Relaxed"
-    # "Metacentric_Relaxed",
-    # "Metacentric_Relaxed"
-    "Metacentric_Tensed"
+   # "Metacentric_Relaxed",
+   #  "Metacentric_Relaxed",
+   #  "Metacentric_Relaxed",
+   "Metacentric_Relaxed",
+   "Metacentric_Tensed"
+    # "Metacentric_Tensed",
+    # "Metacentric_Tensed",ß
+    # "Metacentric_Tensed",
     # "Metacentric_Tensed"
   # "Telocentric_Relaxed"
   # "Telocentric_Tensed"
@@ -146,15 +155,16 @@ kt_width = c(
 # All simulation IDs
 # Change
 sims <- c(
-  "test/SimID_318090108_0__exported"
-
+  # "SimID_321527961_0__exported",
+  "SimID_316230588_0__exported",
+  "SimID_320771084_0__exported"
   )
 
 # Folder naming corresponding to specific simulation ID
 # Change
 var <- c(
-  "rivanna_test"
-  
+  "06_13_26_metacentric_relaxed_MCF10A_chr19_PMP1",
+  "06_13_26_metacentric_transition_tensed_MCF10A_chr19_PMP1_t_0"
 )
 #########################################################
 
@@ -183,8 +193,8 @@ for(i in 1:length(sims)){
                desiredInterval=1,
                nHeatmaps = 7,
                # alternative_range <- NULL, #when equal spacing is enough on heatmaps
-               alternative_range <- c(0, 10, 20, 25, 30, 40, 50), #alternative desired time points to be plotted on heatmaps
-               # alternative_range <- c(0, 20, 30, 50, 70, 90, 100), #alternative desired time points to be plotted on heatmaps
+               # alternative_range <- c(0, 10, 20, 25, 30, 40, 50, 70, 100, 135, 150), #alternative desired time points to be plotted on heatmaps
+               alternative_range <- c(0, 1, 10, 20, 25, 30, 40), #alternative desired time points to be plotted on heatmaps
                cutoff=list("CPC"=11), #for heatmap color bar
                funcPath,
                importPath,

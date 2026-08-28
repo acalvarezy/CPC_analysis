@@ -1,0 +1,30 @@
+1. Get paths for the csv files (species of interest) 
+
+2.	Change directories names:
+$while IFS= read -r file; do
+	    if [ -f "$file" ]; then
+       	# 1. Extract the SimID number from the filename
+   	sim_id=$(basename "$file" | cut -d'_' -f2)
+   	     
+     	# 2. Get the base path (e.g., ensemble_run29)
+	      parent_dir=$(dirname "$(dirname "$file")")
+      
+      		# 3. Check if 'exported' still exists, then rename it
+         	if [ -d "$parent_dir/exported" ]; then
+           	mv "$parent_dir/exported" "$parent_dir/SimID_${sim_id}_0__exported"
+         
+	fi
+   fi
+done < original_path.txt
+
+
+3.	find . -maxdepth 4 -type d -name "*__exported" | tee path_for_R.txt
+
+
+4. Direct paths:
+find . -maxdepth 4 -type d -iname "*exported" | tee original_path.txt
+sed 's/\.//' original_path.txt > paths.txt
+grep -oP 'run\d+' paths.txt > runs.txt
+
+#Editions
+sed 's/^/"/; s/$/",/' paths.txt > quoted_paths.txt

@@ -33,9 +33,9 @@ plt.plot(df_krem_paper['Time'], df_krem_paper['kremoval_paper'], color=COLOR_1, 
 # plt.plot(df_dmso_model['Time'], df_dmso_model['DMSO_model'], color=COLOR_2, linestyle='-', linewidth=3, zorder=2)
 
 # 4. Kinase Removal Model
-df_krem_model = df.dropna(subset=['Time', 'kremoval_model'])
-plt.scatter(df_krem_model['Time'], df_krem_model['kremoval_model'], color=COLOR_2, s=150, zorder=3, label='Model')
-plt.plot(df_krem_model['Time'], df_krem_model['kremoval_model'], color=COLOR_2, linestyle=':', linewidth=4, zorder=2)
+df_krem_model = df.dropna(subset=['Time', 'kremoval_model2'])
+plt.scatter(df_krem_model['Time'], df_krem_model['kremoval_model2'], color=COLOR_2, s=150, zorder=3, label='Model + bivalent binding')
+plt.plot(df_krem_model['Time'], df_krem_model['kremoval_model2'], color=COLOR_2, linestyle=':', linewidth=4, zorder=2)
 
 
 # Set constraints
@@ -49,5 +49,5 @@ leg = plt.legend(fontsize=15)
 # leg = plt.legend(title="PMID: 38614097", title_fontsize=16, fontsize=15)
 # leg.get_title().set_weight('bold')
 plt.tight_layout() # Ensures labels fit nicely in the PDF
-plt.savefig("/Users/catalinaalvarez/Documents/GitHub/CPC_analysis/3_additional_plots/kinases_removal_paperFig5HI_all2.pdf")
+plt.savefig("/Users/catalinaalvarez/Documents/GitHub/CPC_analysis/3_papers2models/kinases_removal_paperFig5HI_ivalues_model2_0m_2.pdf")
 plt.show()

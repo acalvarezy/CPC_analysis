@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # --- Load data ---
-df = pd.read_excel("/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1/ensemble_parameters2DCPC_ic.xlsx")
+df = pd.read_excel("/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/ensemble_parameters2DCPC_ic.xlsx")
 
 # Identify parameter columns: from 'Dcyt' to 'Kmplk1' inclusive
 cols = list(df.columns)
@@ -17,10 +17,12 @@ param_cols = cols[start:end + 1]
 
 # Run labels: pull the "ensemble_runN" tail from result_dir
 def run_label(path):
-    m = re.search(r'(run\d+)$', str(path))
+    # m = re.search(r'(run\d+)$', str(path))
+    m = re.search(r"ensemble_run(\d+)", str(path).strip())
     return m.group(1) if m else str(path)
 
 run_labels = df["result_dir"].apply(run_label)
+print(run_labels)
 
 # Build parameter matrix: rows = parameters, columns = runs
 param_matrix = df[param_cols].T
@@ -40,7 +42,7 @@ cpc_ic = cpc_ic[order]
 # z_matrix = param_matrix.sub(param_matrix.mean(axis=1), axis=0).div(param_matrix.std(axis=1), axis=0)
 
 # Normalization with Log2 FC to the reference model (run101)
-reference_run = "run101"
+reference_run = "101"
 
 if reference_run not in param_matrix.columns:
     raise ValueError(f"{reference_run} not found in run columns")
@@ -88,7 +90,7 @@ plt.setp(g.ax_heatmap.get_xticklabels(), rotation=90, fontsize=6)
 plt.setp(g.ax_heatmap.get_yticklabels(), rotation=0, fontsize=8)
 
 # --- Highlight one specific run label ---
-highlight_run = "run101"  # <-- set the run you want highlighted
+highlight_run = "101"  # <-- set the run you want highlighted
  
 for label in g.ax_heatmap.get_xticklabels():
     if label.get_text() == highlight_run:
@@ -106,5 +108,5 @@ sm.set_array([])
 cbar = g.fig.colorbar(sm, cax=cax)
 cbar.set_label("Normalized DCPC")
 
-g.savefig("/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1/ensemble_nomrparameters_ic_heatmap.pdf", dpi=200, bbox_inches="tight")
+g.savefig("/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/ensemble_nomrparameters_ic_heatmap.pdf", dpi=200, bbox_inches="tight")
 print("done")

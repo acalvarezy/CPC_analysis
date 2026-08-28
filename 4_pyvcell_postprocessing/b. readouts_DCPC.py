@@ -15,10 +15,10 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
     print("Plotting across models")
 
     #DCPC
-    if os.path.isdir(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DCPC/{name_folder}"):
+    if os.path.isdir(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/{name_folder}"):
         pass
     else:
-        os.makedirs(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CPC_readouts/DCPC/{name_folder}")
+        os.makedirs(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/{name_folder}")
         print(f"Made folder {name_folder}")
 
     if len(name_list) == 0:
@@ -42,13 +42,13 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
             tmpc['Time'] = tmp1['Time']
             tmpc['parameter'] = tmp1['parameter']
             tmpc['bg_corrected'] = tmp1['all'] - tmp2['all']
-            model = re.search(r"ensemble_([^_]+)", n).group(1)
+            model = re.search(r"run([^_]+)", n).group(1)
             DCPC = tmpc.loc[tmpc['Time'] == timepoint, 'bg_corrected'].values[0]
 
             df.loc[len(df)] = [model, DCPC]
 
         print(df)
-        df.to_excel(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1/plots/{name_plot}_{location[0]}_at_{timepoint}m.xlsx")
+        df.to_excel(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/plots/{name_plot}_{location[0]}_at_{timepoint}m.xlsx")
 
         fig = plt.figure(figsize = (15,7))
         sns.lineplot(data=df, x="model", y="DCPC", markersize=3, palette="magma", linewidth=3)
@@ -65,36 +65,117 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
         else: 
             plt.title(fr"$\Delta CPC$ at kinetochores ({timepoint} m)")    
         
-        plt.savefig(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1/plots/{name_plot}_{location[0]}_at_{timepoint}m.pdf")
+        plt.savefig(f"/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/plots/{name_plot}_{location[0]}_at_{timepoint}m.pdf")
         plt.show()
 
 name_folder = "folder"
-in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1"
+in_dir_ = "/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2"
 plot_list = [
-            "ensemble_run101", "ensemble_run13", "ensemble_run37", 
-    "ensemble_run32", "ensemble_run48", "ensemble_run76", "ensemble_run27", "ensemble_run81", 
-    "ensemble_run57", "ensemble_run20", "ensemble_run59", "ensemble_run87", "ensemble_run23", 
-    "ensemble_run53", "ensemble_run98", "ensemble_run73", "ensemble_run21", "ensemble_run29", 
-    "ensemble_run95", "ensemble_run4", "ensemble_run24", "ensemble_run93", "ensemble_run85", 
-    "ensemble_run40", "ensemble_run30", "ensemble_run60", "ensemble_run3", "ensemble_run77", 
-    "ensemble_run100", "ensemble_run74", "ensemble_run34", "ensemble_run92", "ensemble_run19", 
-    "ensemble_run96", "ensemble_run82", "ensemble_run12", "ensemble_run41", "ensemble_run83", 
-    "ensemble_run84", "ensemble_run63", "ensemble_run55", "ensemble_run45", "ensemble_run46", 
-    "ensemble_run61", "ensemble_run43", "ensemble_run36", "ensemble_run89", "ensemble_run8", 
-    "ensemble_run65", "ensemble_run64", "ensemble_run79", "ensemble_run2", "ensemble_run1", 
-    "ensemble_run50", "ensemble_run70", "ensemble_run18", "ensemble_run5", "ensemble_run44", 
-    "ensemble_run90", "ensemble_run66", "ensemble_run97", "ensemble_run99", "ensemble_run16", 
-    "ensemble_run10", "ensemble_run38", "ensemble_run15", "ensemble_run62", "ensemble_run51", 
-    "ensemble_run78", "ensemble_run52", "ensemble_run56", "ensemble_run35", "ensemble_run54", 
-    "ensemble_run17", "ensemble_run9", "ensemble_run31", "ensemble_run88", "ensemble_run86", 
-    "ensemble_run49", "ensemble_run47", "ensemble_run14", "ensemble_run72", "ensemble_run22", 
-    "ensemble_run28", "ensemble_run42", "ensemble_run25", "ensemble_run69", "ensemble_run58", 
-    "ensemble_run75"
+            "run101", "run7",
+"run39",
+"run26",
+"run16",
+"run32",
+"run70",
+"run11",
+"run61",
+"run23",
+"run81",
+"run48",
+"run64",
+"run78",
+"run38",
+"run40",
+"run44",
+"run55",
+"run29",
+"run36",
+"run79",
+"run15",
+"run93",
+"run91",
+"run21",
+"run59",
+"run31",
+"run5",
+"run18",
+"run67",
+"run49",
+"run57",
+"run66",
+"run53",
+"run90",
+"run6",
+"run83",
+"run63",
+"run87",
+"run73",
+"run72",
+"run88",
+"run52",
+"run51",
+"run10",
+"run17",
+"run77",
+"run25",
+"run14",
+"run96",
+"run12",
+"run54",
+"run68",
+"run80",
+"run71",
+"run8",
+"run3",
+"run9",
+"run45",
+"run34",
+"run95",
+"run24",
+"run41",
+"run60",
+"run89",
+"run28",
+"run37",
+"run1",
+"run43",
+"run65",
+"run35",
+"run97",
+"run69",
+"run33",
+"run27",
+"run99",
+"run94",
+"run20",
+"run30",
+"run13",
+"run85",
+"run84",
+"run47",
+"run56",
+"run76",
+"run22",
+"run75",
+"run50",
+"run42",
+"run58",
+"run92",
+"run19",
+"run62",
+"run2",
+"run74",
+"run98",
+"run0",
+"run86",
+"run4",
+"run46",
+"run82"
                                             ]
 
-location = ["ch", #change region of interest
+location = ["ic", #change region of interest
             "bg"
                 ]
 
-plot_across_models('CPC_all', plot_list, in_dir_, location, 5 ,name_plot="07_15_26_relaxed_cv0.1",active= 'all')
+plot_across_models('CPC_all', plot_list, in_dir_, location, 5 ,name_plot="07_27_26_relaxed_cv0.1",active= 'all')
 
