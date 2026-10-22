@@ -14,8 +14,8 @@ import re
 import pandas as pd
 
 ENSEMBLE_FILE = "/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/ensemble_parameters_combined.xlsx"  
-ICVALUES_FILE = "/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/plots/07_27_26_relaxed_cv0.1_ic_at_5m.xlsx"
-OUTPUT_FILE = "/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/ensemble_parameters2DCPC_.xlsx"
+ICVALUES_FILE = "/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/plots/07_27_26_relaxed_cv0.1_ic_at_8m.xlsx"
+OUTPUT_FILE = "/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/ensemble_parameters2DCPC_ic_8m.xlsx"
 
 # --- Load both files ---
 df_ensemble = pd.read_excel(ENSEMBLE_FILE)

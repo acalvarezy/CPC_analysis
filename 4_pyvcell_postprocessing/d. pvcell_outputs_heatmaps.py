@@ -7,12 +7,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # --- Load data ---
-df = pd.read_excel("/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/ensemble_parameters2DCPC_ic.xlsx")
+df = pd.read_excel("/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/ensemble_parameters2DCPC_ic_8m.xlsx")
 
 # Identify parameter columns: from 'Dcyt' to 'Kmplk1' inclusive
 cols = list(df.columns)
 start = cols.index("Dcyt")
-end = cols.index("Kmplk1")
+end = cols.index("KmH3")
 param_cols = cols[start:end + 1]
 
 # Run labels: pull the "ensemble_runN" tail from result_dir
@@ -108,5 +108,5 @@ sm.set_array([])
 cbar = g.fig.colorbar(sm, cax=cax)
 cbar.set_label("Normalized DCPC")
 
-g.savefig("/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/ensemble_nomrparameters_ic_heatmap.pdf", dpi=200, bbox_inches="tight")
+g.savefig("/Users/catalinaalvarez/Documents/CPC_plots_2026/CV0.1_relaxed_test2/ensemble_nomrparameters_ic_heatmap_8m.pdf", dpi=200, bbox_inches="tight")
 print("done")

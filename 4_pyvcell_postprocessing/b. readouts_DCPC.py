@@ -42,7 +42,7 @@ def plot_across_models(species, plot_list, in_dir, location, timepoint, name_lis
             tmpc['Time'] = tmp1['Time']
             tmpc['parameter'] = tmp1['parameter']
             tmpc['bg_corrected'] = tmp1['all'] - tmp2['all']
-            model = re.search(r"run([^_]+)", n).group(1)
+            model = p#re.search(r"run([^_]+)", n).group(1)
             DCPC = tmpc.loc[tmpc['Time'] == timepoint, 'bg_corrected'].values[0]
 
             df.loc[len(df)] = [model, DCPC]
@@ -177,5 +177,5 @@ location = ["ic", #change region of interest
             "bg"
                 ]
 
-plot_across_models('CPC_all', plot_list, in_dir_, location, 5 ,name_plot="07_27_26_relaxed_cv0.1",active= 'all')
+plot_across_models('CPC_all', plot_list, in_dir_, location, 8 ,name_plot="07_27_26_relaxed_cv0.1",active= 'all')
 
